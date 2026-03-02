@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Забор с воротами · план и материалы</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: #f3f6f9;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+            min-height: 100vh;
+        }
+        .app {
+            max-width: 1100px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #0b2a3c;
+        }
+        .subhead {
+            color: #2c4c6e;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            border-left: 4px solid #2e7ea1;
+            padding-left: 1rem;
+            background: #eaf0f8;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.4;
+            padding: 0.7rem 1rem;
+        }
+        /* табы */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #bdd3e6;
+            padding-bottom: 4px;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 30px 30px 0 0;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #2c5779;
+            background: #deecf5;
+            border: 1px solid transparent;
+            margin-bottom: -2px;
+        }
+        .tab-btn.active {
+            background: white;
+            color: #0e3f5c;
+            border: 2px solid #bdd3e6;
+            border-bottom-color: white;
+        }
+        .tab-panel {
+            display: none;
+            background: white;
+            border-radius: 0 20px 20px 20px;
+            box-shadow: 0 10px 25px rgba(0,20,40,0.12);
+            padding: 28px 24px;
+            border: 1px solid #d0e2f0;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* аккордеон шагов */
+        .step-accordion {
+            border-bottom: 1px solid #dae4ed;
+        }
+        .step-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding: 18px 8px 18px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #144a6f;
+            border-bottom: 1px solid transparent;
+        }
+        .step-btn .step-num {
+            background: #2e7ea1;
+            color: white;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+        .step-btn .arrow {
+            margin-left: auto;
+            font-size: 1.7rem;
+            color: #2e7ea1;
+            transition: transform 0.2s;
+        }
+        .step-content {
+            padding: 0 16px 18px 52px;
+            display: none;
+            background: #f8fbfe;
+            border-radius: 14px;
+            margin-top: -5px;
+            margin-bottom: 8px;
+        }
+        .step-content.show {
+            display: block;
+        }
+        .step-content p {
+            margin: 12px 0;
+            color: #1b344a;
+        }
+        .step-content ul {
+            padding-left: 1.5rem;
+            margin: 10px 0;
+        }
+        .step-content li {
+            margin: 6px 0;
+        }
+        .info-note {
+            background: #ebf5f0;
+            border-left: 5px solid #1b7e4b;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin: 24px 0 10px;
+            font-weight: 500;
+        }
+
+        /* таблица материалов */
+        .material-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #103a56;
+            margin: 20px 0 15px;
+            border-bottom: 3px solid #aecfeb;
+            padding-bottom: 6px;
+        }
+        .material-grid {
+            display: grid;
+            grid-template-columns: 2fr 0.7fr 1fr 1.2fr;
+            font-weight: 600;
+            background: #daeaf5;
+            padding: 12px 12px;
+            border-radius: 12px 12px 0 0;
+            border: 1px solid #b6cee6;
+        }
+        .material-row {
+            display: grid;
+            grid-template-columns: 2fr 0.7fr 1fr 1.2fr;
+            padding: 12px;
+            border-bottom: 1px solid #cedcea;
+            align-items: center;
+        }
+        .material-row.total {
+            background: #f0f7fe;
+            font-weight: 700;
+            border-bottom: 2px solid #2e7ea1;
+            border-top: 2px solid #2e7ea1;
+        }
+        .price-note {
+            background: #fbf4d3;
+            padding: 14px;
+            border-radius: 12px;
+            margin: 25px 0 5px;
+            font-size: 0.95rem;
+        }
+        .badge {
+            background: #1e4f6e;
+            color: white;
+            border-radius: 30px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            margin-left: 8px;
+        }
+        .footer-notes {
+            margin-top: 30px;
+            border-top: 1px dashed #8db3d0;
+            padding-top: 20px;
+            font-size: 0.95rem;
+            color: #2f4f68;
+        }
+        .btn-small {
+            background: #e0eefb;
+            border: none;
+            border-radius: 20px;
+            padding: 2px 12px;
+        }
+        .grey {
+            color: #6a7d92;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <h1>⛰️ Забор 30 м + распашные ворота 4 м + калитка</h1>
+    <div class="subhead">
+        Участок — твердая супесь • штакетник двусторонний • М‑образный профиль • ворота на 3 столбах 100х100 • лаги с двух сторон
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" id="tab1-btn">📋 Пошаговый монтаж</button>
+        <button class="tab-btn" id="tab2-btn">🛒 Материалы (что купить)</button>
+    </div>
+
+    <!-- Панель 1 — шаги (аккордеон) -->
+    <div id="panel1" class="tab-panel active">
+        <div class="info-note">
+            ⏱️ 4–6 дней самостоятельной работы + 1 день сварщика на ворота. Все шаги проверены, под твой план.
+        </div>
+
+        <!-- аккордеон шагов -->
+        <div class="step-accordion" id="step1">
+            <button class="step-btn">
+                <span class="step-num">1</span>
+                <span>Разметка и подготовка</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="step-content">
+                <p><strong>Что делаем:</strong> натягиваем шнур по линии забора, отмечаем крайние точки, ворота (4 м) и калитку (1 м).</p>
+                <ul>
+                    <li>Колышки, шнурка, рулетка.</li>
+                    <li>Проверить диагонали проёма ворот (важно для сварщика).</li>
+                    <li>Отметить места рядовых столбов с шагом 2.5 м.</li>
+                    <li>Учесть уклон — первый и последний столб выставить по лазерному уровню.</li>
+                </ul>
+                <p>✅ Совет: используй лазер + камеру телефона, если солнце мешает.</p>
+            </div>
+        </div>
+
+        <div class="step-accordion" id="step2">
+            <button class="step-btn">
+                <span class="step-num">2</span>
+                <span>Бурение ям под рядовые столбы</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="step-content">
+                <p><strong>Глубина 70 см, диаметр 200–250 мм.</strong></p>
+                <ul>
+                    <li>Мотобур или ручной бур. Для 10 ям — 4–6 часов.</li>
+                    <li>Старайся держать вертикаль.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-accordion" id="step3">
+            <button class="step-btn">
+                <span class="step-num">3</span>
+                <span>Зондирование арматурой (на камни)</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="step-content">
+                <p><strong>Арматура 12 мм с заострённым концом.</strong></p>
+                <ul>
+                    <li>Протыкаем дно каждой ямы на глубину ещё 50 см.</li>
+                    <li>Если упёрлись в камень — пробуем рядом или бурим глубже вручную.</li>
+                    <li>Это твой метод избежать сюрпризов при забивке.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-accordion" id="step4">
+            <button class="step-btn">
+                <span class="step-num">4</span>
+                <span>Установка и забивка рядовых столбов</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="step-content">
+                <p><strong>Труба 60×60×3, 3 м</strong></p>
+                <ul>
+                    <li>Низ трубы обработать битумной мастикой (до 1.2 м).</li>
+                    <li>Ставим столб на дно ямы, подсыпаем немного щебня для фиксации.</li>
+                    <li>Забиваем кувалдой через насадку на расчётную глубину: <br>
+                        3 м (труба) – 1.8 м (над землёй) – 0.7 м (яма) = 0.5 м забивки.</li>
+                    <li>После забивки над землёй ровно 1.8 м (проверить шнуром).</li>
+                    <li>Контролировать вертикаль уровнем.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-accordion" id="step5">
+            <button class="step-btn">
+                <span class="step-num">5</span>
+                <span>Подсыпка щебня и трамбовка</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="step-content">
+                <p><strong>Щебень 20–40 мм, фракция твоя любимая.</strong></p>
+                <ul>
+                    <li>Засыпаем яму послойно, каждые 20 см проливаем водой и трамбуем (ручная трамбовка или брус).</li>
+                    <li>Верхний слой можно сделать конусом для отвода воды.</li>
+                    <li>Для всех 10 рядовых столбов.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-accordion" id="step6">
+            <button class="step-btn">
+                <span class="step-num">6</span>
+                <span>Установка свай под ворота (4 шт)</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="step-content">
+                <p><strong>Винтовые сваи 108 мм, длина 2.5 м.</strong></p>
+                <ul>
+                    <li>Вкручиваем строго вертикально на глубину 2 м (ниже промерзания).</li>
+                    <li>По 2 сваи под каждый крайний воротный столб (левый и правый).</li>
+                    <li>Обрезаем по уровню: над землёй 10–15 см.</li>
+                    <li>Заливаем внутрь бетон М300 (армирование не обязательно).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-accordion" id="step7">
+            <button class="step-btn">
+                <span class="step-num">7</span>
+                <span>Сварка ворот, калитки и столбов (мастер)</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="step-content">
+                <p><strong>Приглашаем сварщика на 1 день.</strong></p>
+                <ul>
+                    <li>Приваривает воротные столбы 100×100×4 к сваям (огонь!).</li>
+                    <li>Варит каркас ворот (две створки по 2 м) и калитки (1 м) по твоим размерам.</li>
+                    <li>Лаги на воротах и калитке приваривает сразу (по 3 лаги с каждой стороны).</li>
+                    <li>Приваривает петли, засовы, ограничители.</li>
+                    <li>Следит за геометрией — проверяй диагонали.</li>
+                </ul>
+                <p>✅ Ты заранее подготавливаешь трубы и фурнитуру.</p>
+            </div>
+        </div>
+
+        <div class="step-accordion" id="step8">
+            <button class="step-btn">
+                <span class="step-num">8</span>
+                <span>Монтаж лаг на забор через Х-кронштейны</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="step-content">
+                <p><strong>Труба 40×20×1.5 мм, 4 ряда (две снаружи, две изнутри).</strong></p>
+                <ul>
+                    <li>На каждый рядовой столб крепим по 4 кронштейна (саморезы 5.5×25).</li>
+                    <li>Вставляем лаги, фиксируем саморезами.</li>
+                    <li>Проверяем горизонталь уровнем (шнур по верху).</li>
+                    <li>Стыкуем лаги на столбах (в одном кронштейне).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-accordion" id="step9">
+            <button class="step-btn">
+                <span class="step-num">9</span>
+                <span>Крепление штакетника (двусторонний)</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="step-content">
+                <p><strong>М‑образный штакетник 2 м, 306 шт.</strong></p>
+                <ul>
+                    <li>Саморезами 5.5×25 (4 на штакетину).</li>
+                    <li>Сначала крепим с одной стороны, потом с другой (вразбежку).</li>
+                    <li>Шаблон для равномерного зазора.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-accordion" id="step10">
+            <button class="step-btn">
+                <span class="step-num">10</span>
+                <span>Покраска, финиш, навешивание</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="step-content">
+                <p><strong>Грунт-эмаль, кисти.</strong></p>
+                <ul>
+                    <li>Зачистить и покрасить сварные швы.</li>
+                    <li>Подкрасить торцы труб.</li>
+                    <li>Навесить створки, отрегулировать.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-notes">
+            <span class="badge">ЛАЙФХАК</span> При забивке используй насадку-оголовок — не расклепаешь верх.
+        </div>
+    </div>
+
+    <!-- Панель 2 — полный список материалов -->
+    <div id="panel2" class="tab-panel">
+        <h2 class="material-header">🧱 Основной металл и крепёж</h2>
+        <div class="material-grid">
+            <span>Позиция</span><span>Кол-во</span><span>Цена ед.</span><span>Сумма</span>
+        </div>
+        <div class="material-row"><span>Столбы рядовые 60×60×3 мм, 3 м</span><span>10 шт</span><span>1 523 ₽</span><span>15 230 ₽</span></div>
+        <div class="material-row"><span>Столбы воротные 100×100×4 мм (6 м + 3 м)</span><span>2 шт (6м +3м)</span><span>6 373 + 3 478</span><span>9 851 ₽</span></div>
+        <div class="material-row"><span>Сваи винтовые 108×2.5 м</span><span>4 шт</span><span>3 235 ₽</span><span>12 940 ₽</span></div>
+        <div class="material-row"><span>Лаги забор 40×20×1.5 мм, 6 м</span><span>20 шт</span><span>840 ₽</span><span>16 800 ₽</span></div>
+        <div class="material-row"><span>Лаги ворота/калитка 40×20×1.5 мм, 6 м</span><span>5 шт</span><span>840 ₽</span><span>4 200 ₽</span></div>
+        <div class="material-row"><span>Х-кронштейны (крепление лаг)</span><span>45 шт</span><span>180 ₽</span><span>8 100 ₽</span></div>
+        <div class="material-row"><span>Металлоштакетник М-обр., 2 м, ширина 100 мм</span><span>306 шт</span><span>196 ₽</span><span>59 976 ₽</span></div>
+        <div class="material-row"><span>Саморезы 5.5×25 мм (упаковка 300 шт)</span><span>4 уп.</span><span>890 ₽</span><span>3 560 ₽</span></div>
+        <div class="material-row total"><span>ПРОМЕЖУТОЧНЫЙ ИТОГ (металл+крепёж)</span><span></span><span></span><span>130 657 ₽</span></div>
+
+        <h2 class="material-header" style="margin-top:32px">⛽ Расходные материалы и стройхимия</h2>
+        <div class="material-grid">
+            <span>Позиция</span><span>Кол-во</span><span>Цена</span><span>Сумма</span>
+        </div>
+        <div class="material-row"><span>Щебень гранитный 20–40 мм</span><span>2 м³</span><span>уточнить</span><span>—</span></div>
+        <div class="material-row"><span>Битумная мастика (для низа столбов)</span><span>15 кг</span><span>≈ 2 000</span><span>2 000</span></div>
+        <div class="material-row"><span>Грунт-эмаль по металлу (антикор)</span><span>5 л</span><span>≈ 2 500</span><span>2 500</span></div>
+        <div class="material-row"><span>Электроды (УОНИ или МР-3, 3–4 мм)</span><span>5 кг</span><span>≈ 2 000</span><span>2 000</span></div>
+        <div class="material-row"><span>Растворитель/обезжириватель</span><span>1 л</span><span>≈ 300</span><span>300</span></div>
+
+        <h2 class="material-header" style="margin-top:32px">🔩 Фурнитура для ворот и калитки</h2>
+        <div class="material-row"><span>Петли усиленные (воротные) ⌀25–30</span><span>4 шт</span><span>≈ 800</span><span>800</span></div>
+        <div class="material-row"><span>Петли для калитки (средние)</span><span>2 шт</span><span>≈ 350</span><span>350</span></div>
+        <div class="material-row"><span>Засовы (шпингалеты) для ворот, компл.</span><span>2 компл</span><span>≈ 700</span><span>1 400</span></div>
+        <div class="material-row"><span>Ограничители открывания</span><span>2 шт</span><span>≈ 400</span><span>400</span></div>
+        <div class="material-row"><span>Задвижка/щеколда для калитки</span><span>1 шт</span><span>≈ 300</span><span>300</span></div>
+        <div class="material-row"><span>Замок накладной (опционально)</span><span>1 шт</span><span>≈ 800</span><span>800</span></div>
+
+        <div class="material-row total" style="margin-top:12px">
+            <span>ОРИЕНТИР ВСЕГО (без щебня и сварщика)</span><span></span><span></span><span>≈ 141 500 ₽</span>
+        </div>
+
+        <div class="price-note">
+            💡 Добавь сюда доставку, цену щебня (≈ 4–5 тыс за 2 м³) и работу сварщика ≈ 15–20 тыс. <br>
+            <strong>Финал примерно 157–165 тыс. ₽</strong> — металл, штакетник, фурнитура, работа.
+        </div>
+        <div class="footer-notes">
+            ✅ Лаги с двух сторон учтены (4 ряда на заборе, по 6 лаг на воротах/калитке). Перемычка над воротами из остатка трубы 100×100. Сварщик приваривает лаги к воротным столбам.
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // табы
+        const tab1btn = document.getElementById('tab1-btn');
+        const tab2btn = document.getElementById('tab2-btn');
+        const panel1 = document.getElementById('panel1');
+        const panel2 = document.getElementById('panel2');
+
+        tab1btn.addEventListener('click', function() {
+            tab1btn.classList.add('active');
+            tab2btn.classList.remove('active');
+            panel1.classList.add('active');
+            panel2.classList.remove('active');
+        });
+        tab2btn.addEventListener('click', function() {
+            tab2btn.classList.add('active');
+            tab1btn.classList.remove('active');
+            panel2.classList.add('active');
+            panel1.classList.remove('active');
+        });
+
+        // аккордеон для шагов
+        const stepButtons = document.querySelectorAll('.step-btn');
+        stepButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const content = this.nextElementSibling;
+                const arrow = this.querySelector('.arrow');
+                if (content.classList.contains('show')) {
+                    content.classList.remove('show');
+                    arrow.innerHTML = '▼';
+                } else {
+                    content.classList.add('show');
+                    arrow.innerHTML = '▲';
+                }
+            });
+        });
+
+        // открыть первый шаг по умолчанию
+        const firstStep = document.querySelector('.step-content');
+        if(firstStep) firstStep.classList.add('show');
+        const firstArrow = document.querySelector('.step-btn .arrow');
+        if(firstArrow) firstArrow.innerHTML = '▲';
+    })();
+</script>
+</body>
+</html>
