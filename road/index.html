@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подъездная дорога 40х5: пошаговый план</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #f3f6f9;
+            display: flex;
+            justify-content: center;
+            padding: 30px 15px;
+            line-height: 1.5;
+            color: #1e2b37;
+        }
+        .document {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0,20,30,0.25);
+            overflow: hidden;
+            border: 1px solid #e0e9ef;
+        }
+        .header {
+            background: linear-gradient(135deg, #1b3b4f 0%, #14313e 100%);
+            color: white;
+            padding: 28px 32px;
+        }
+        .header h1 {
+            font-weight: 500;
+            font-size: 2.2rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        .header .sub {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-weight: 300;
+        }
+        .header .sub span {
+            background: rgba(255,255,255,0.12);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 1rem;
+        }
+        .content {
+            padding: 32px;
+        }
+        .section {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #dce5ec;
+            padding-bottom: 24px;
+        }
+        .section:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: #0f2a36;
+            margin-bottom: 20px;
+        }
+        .section-title .step-num {
+            background: #22738a;
+            color: white;
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .card {
+            background: #f8fafd;
+            border-radius: 24px;
+            padding: 22px 24px;
+            border: 1px solid #dee9f0;
+        }
+        .card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a485b;
+            border-left: 5px solid #31849c;
+            padding-left: 16px;
+        }
+        .param-list {
+            list-style: none;
+        }
+        .param-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #cbd8e3;
+            font-size: 1.1rem;
+        }
+        .param-list li:last-child {
+            border-bottom: 0;
+        }
+        .badge {
+            background: white;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #114455;
+            border: 1px solid #b6cfdd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 20px;
+            border: 1px solid #d2e0e9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th {
+            background: #e5f0f5;
+            font-weight: 600;
+            padding: 16px 12px;
+            text-align: left;
+            color: #04313f;
+        }
+        td, th {
+            padding: 14px 12px;
+            border-bottom: 1px solid #d2e0e9;
+        }
+        tr:last-child td {
+            border-bottom: 0;
+        }
+        .highlight {
+            background: #e0f0f5;
+            border-radius: 16px;
+            padding: 6px 16px;
+            font-weight: 600;
+            color: #024257;
+        }
+        .price-note {
+            background: #fff2e0;
+            border-left: 6px solid #e68a2e;
+            padding: 18px 24px;
+            border-radius: 20px;
+            margin-top: 24px;
+            font-size: 1.05rem;
+        }
+        .footer-note {
+            margin-top: 30px;
+            background: #e2f0f7;
+            border-radius: 26px;
+            padding: 20px 28px;
+            color: #103946;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-note .price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: white;
+            padding: 8px 24px;
+            border-radius: 60px;
+            color: #00576b;
+            box-shadow: 0 6px 12px rgba(0,60,80,0.1);
+        }
+        .btn-copy {
+            background: #22738a;
+            border: none;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .btn-copy:hover {
+            background: #1b5e72;
+            transform: scale(1.02);
+        }
+        .warning {
+            background: #fef3e0;
+            border-radius: 20px;
+            padding: 14px 22px;
+            border: 1px solid #f7c46c;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div class="document" id="roadPlan">
+    <div class="header">
+        <h1>🚜 Подъездная дорога 40×5 м (Луга, Ленобласть)</h1>
+        <div class="sub">
+            <span>🧹 сезонная / летняя</span>
+            <span>⚖️ нагрузка редкая</span>
+            <span>📐 геодезист — 5–10 тыс. ₽</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- ШАГ 0 -->
+        <div class="section">
+            <div class="section-title"><span class="step-num">0</span> Юридическая минута</div>
+            <div class="warning">
+                ✅ Межевание есть — два колышка на месте.<br>
+                🎯 Заказать геодезиста для <strong>выноса точки съезда</strong> (от существующей грунтовки до оси участка). Ошибка даже в 1 метр = риск штрафа или переделки.<br>
+                📄 Администрация сказала «делайте сами, но не мешайте» — работаем аккуратно, без бетона и асфальта.
+            </div>
+        </div>
+
+        <!-- ШАГ 1 -->
+        <div class="section">
+            <div class="section-title"><span class="step-num">1</span> Разметка и подготовка</div>
+            <ul style="margin-left: 30px; font-size: 1.15rem;">
+                <li><strong>Колышки + веревка</strong> — обозначить коридор шириной ровно 5 м (от точки съезда до въезда на участок).</li>
+                <li><strong>Убрать поросль</strong>, крупные корни, мусор.</li>
+            </ul>
+        </div>
+
+        <!-- ШАГ 2 -->
+        <div class="section">
+            <div class="section-title"><span class="step-num">2</span> Срезка грунта (трактор с отвалом)</div>
+            <div class="grid-2col">
+                <div class="card">
+                    <h3>🔹 Рекомендуемый вариант</h3>
+                    <ul class="param-list">
+                        <li><span>Глубина срезки:</span> <strong class="badge">5–10 см</strong></li>
+                        <li><span>Что убираем:</span> дёрн, кочки, мелкую поросль</li>
+                        <li><span>Зачем:</span> дорога будет выше уровня земли на 6–11 см</li>
+                    </ul>
+                    <p style="margin-top: 14px;">✅ Вода стекает, полотно сухое.</p>
+                </div>
+                <div class="card">
+                    <h3>🔸 Если грунт болотистый/торф</h3>
+                    <ul class="param-list">
+                        <li><span>Срезать глубже:</span> <strong class="badge">25 см</strong></li>
+                        <li><span>Добавить песок:</span> 15 см (трамбовка)</li>
+                        <li><span>Поверх песка</span> геотекстиль</li>
+                    </ul>
+                    <p style="margin-top: 14px;">💰 Песок + доставка: ~ +15 тыс. руб.</p>
+                </div>
+            </div>
+            <p style="margin-top: 16px;"><strong>Совет:</strong> спланировать уклон 2–3° от центра к краям — вода не застаивается.</p>
+        </div>
+
+        <!-- ШАГ 3 -->
+        <div class="section">
+            <div class="section-title"><span class="step-num">3</span> Геотекстиль</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
+                <div style="flex: 2;">
+                    <ul class="param-list" style="max-width: 500px;">
+                        <li><span>Плотность:</span> <strong>200 г/м²</strong> (можно 150–200)</li>
+                        <li><span>Площадь:</span> 200 м² (рулон 50×4 или два по 25×4)</li>
+                        <li><span>Нахлёст:</span> 20–30 см, края завести на стенки корыта</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; background: #e7f0f5; border-radius: 20px; padding: 15px; text-align: center;">
+                    <span style="font-size: 1.3rem;">💰 ~7 000 ₽</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ШАГ 4 нижний слой -->
+        <div class="section">
+            <div class="section-title"><span class="step-num">4</span> Нижний слой — крупный доломит 40–70</div>
+            <div class="grid-2col">
+                <div>
+                    <table>
+                        <tr><th>Параметр</th><th>Значение</th></tr>
+                        <tr><td>Толщина после трамбовки</td><td>12 см (0,12 м)</td></tr>
+                        <tr><td>Объём</td><td>24 м³ (40×5×0,12)</td></tr>
+                        <tr><td>Насыпная плотность</td><td>~1,35 т/м³</td></tr>
+                        <tr><td><strong>Вес</strong></td><td><strong>≈32 тонны</strong></td></tr>
+                        <tr><td>Примерная цена</td><td>850 ₽/т → ~27 000 ₽</td></tr>
+                    </table>
+                </div>
+                <div class="card">
+                    <h3>📌 Почему доломит?</h3>
+                    <p>Для сезонной дороги прочности М600–800 хватит на 7–10 лет. Жёлтый или серый — неважно, берите, что дешевле. Это природный камень — никаких претензий экологов.</p>
+                </div>
+            </div>
+            <p style="margin-top: 16px;">🚛 Доставка: 2–3 машины по 10–15 т (ориентир 20–25 тыс. руб. в зависимости от расстояния).</p>
+        </div>
+
+        <!-- ШАГ 5 промежуточная трамбовка -->
+        <div class="section">
+            <div class="section-title"><span class="step-num">5</span> Первая трамбовка</div>
+            <p style="font-size: 1.15rem; margin-bottom: 10px;"><strong>Виброплита массой 150–200 кг</strong> (аренда ~2000 руб/сутки). Пролить водой — щебень «укладывается», перестаёт болтаться.</p>
+            <p>⏱️ На 200 м² хватит одного дня.</p>
+        </div>
+
+        <!-- ШАГ 6 верхний слой -->
+        <div class="section">
+            <div class="section-title"><span class="step-num">6</span> Верхний слой — мелкий шлак (0–5 мм)</div>
+            <div class="grid-2col">
+                <div>
+                    <table>
+                        <tr><th>Параметр</th><th>Значение</th></tr>
+                        <tr><td>Толщина</td><td>4 см (0,04 м)</td></tr>
+                        <tr><td>Объём</td><td>8 м³</td></tr>
+                        <tr><td>Вес (шлак)</td><td>≈12 тонн</td></tr>
+                        <tr><td>Цена шлака</td><td>400–500 ₽/т → ~5 000 ₽</td></tr>
+                    </table>
+                    <p style="margin-top: 12px;">🚛 1 машина (12 т). Доставка ~6–8 тыс. руб.</p>
+                </div>
+                <div class="card">
+                    <h3>🔍 Важно про шлак</h3>
+                    <p>Лучше <strong>металлургический</strong> (чёрный, тяжёлый) — он есть в ГОСТах, слеживается в монолит. Если везут с ТЭЦ без документов — рискуете получить отходы. Можете заменить гранитным отсевом (15 т ≈ 16 тыс. ₽) — безопаснее юридически.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ШАГ 7 финиш -->
+        <div class="section">
+            <div class="section-title"><span class="step-num">7</span> Финальная трамбовка</div>
+            <p style="font-size: 1.15rem;">Той же виброплитой, обильно смачивая водой. Мелкая фракция «запечатывает» поверхность — получается плотный настил.</p>
+        </div>
+
+        <!-- СВОДНАЯ ТАБЛИЦА МАТЕРИАЛОВ -->
+        <div class="section">
+            <div class="section-title"><span class="step-num">📋</span> Сводка материалов и веса</div>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Материал</th><th>Толщина</th><th>Объём (м³)</th><th>Вес (т)</th><th>Примерная стоимость (руб)</th></tr></thead>
+                    <tbody>
+                    <tr><td>Геотекстиль 200 г/м²</td><td>–</td><td>200 м²</td><td>–</td><td>7 000</td></tr>
+                    <tr><td>Доломитовый щебень 40–70</td><td>12 см</td><td>24</td><td>32</td><td>27 000</td></tr>
+                    <tr><td>Шлак (0–5 мм)</td><td>4 см</td><td>8</td><td>12</td><td>5 000</td></tr>
+                    <tr><td style="font-weight: 700;">ИТОГО материалы</td><td></td><td></td><td>44 т</td><td>≈39 000 ₽</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 12px;">➕ Доставка (4–5 машин): 25 000–30 000 ₽. Аренда виброплиты: 2 000–3 000 ₽. Работа трактора: 10 000–15 000 ₽.</p>
+        </div>
+
+        <!-- ВЫСОТА -->
+        <div class="section">
+            <div class="section-title"><span class="step-num">⬆️</span> Почему дорога будет выше земли</div>
+            <div style="background: #e5f3f7; border-radius: 24px; padding: 20px 30px;">
+                <p><strong>Срезали 5–10 см грунта → положили 12 см крупного + 4 см мелкого = 16 см.</strong></p>
+                <p>➡️ Превышение над уровнем обочины: <strong>6–11 см</strong>. Лужи останутся на обочине, а дорога останется сухой. Если добавить песок (болотистый вариант) — поднимется ещё выше.</p>
+            </div>
+        </div>
+
+        <!-- БЮДЖЕТ -->
+        <div class="footer-note">
+            <div>
+                <span style="font-size: 1.4rem; font-weight: 300;">💰 Ориентировочный бюджет</span>
+                <div style="font-size: 1rem; color: #1f5f74;">материалы + доставка + техника + геодезист</div>
+            </div>
+            <div class="price">90 000 – 115 000 ₽</div>
+        </div>
+
+        <!-- КНОПКА КОПИРОВАНИЯ -->
+        <div style="display: flex; justify-content: flex-end; margin-top: 30px;">
+            <button class="btn-copy" onclick="copyPlan()">📋 Скопировать план в буфер</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyPlan() {
+        // Собираем текст из документа
+        const planText = `ПОДЪЕЗДНАЯ ДОРОГА 40×5 М (Луга, сезонная)
+
+0. Геодезист (5–10 тыс.) — вынос точки съезда.
+1. Разметка колышками 5 м ширина.
+2. Срезка грунта: 5–10 см (если болото — 25 см + песок 15 см).
+3. Геотекстиль 200 г/м², 200 м² (≈7 тыс. руб.).
+4. Нижний слой: доломит 40–70, 12 см = 32 т (≈27 тыс. руб.).
+5. Трамбовка виброплитой 150–200 кг, проливка водой.
+6. Верхний слой: шлак мелкий (0–5) 4 см = 12 т (≈5 тыс. руб.) или гранитный отсев (≈16 тыс.).
+7. Финальная трамбовка + вода.
+📦 Доставка: 4–5 машин (≈25–30 тыс.). Трактор: 10–15 тыс. Аренда плиты: 2–3 тыс.
+💰 Полная смета: 90–115 тыс. руб.
+Дорога будет выше земли на 6–11 см — вода стекает.`;
+        navigator.clipboard.writeText(planText).then(() => {
+            alert('✅ План скопирован в буфер!');
+        }).catch(() => {
+            alert('❌ Не удалось скопировать, выделите текст вручную.');
+        });
+    }
+</script>
+</body>
+</html>
