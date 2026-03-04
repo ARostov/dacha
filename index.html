@@ -1,6 +1,256 @@
-<html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дачные проекты</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1b3b4f 0%, #0f2a36 100%);
+            color: white;
+            padding: 40px 48px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .projects {
+            padding: 40px 48px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 8px 20px rgba(0, 20, 30, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e9ef;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -8px rgba(20, 67, 87, 0.2);
+            border-color: #9ec5d9;
+        }
+
+        .project-card:active {
+            transform: translateY(-2px);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: #f0f7fc;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #0f2a36;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .project-description {
+            color: #4f6573;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .project-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: #22738a;
+            font-weight: 500;
+            border-top: 1px dashed #cbd8e3;
+            padding-top: 16px;
+            margin-top: auto;
+        }
+
+        .arrow {
+            margin-left: auto;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .project-card:hover .arrow {
+            transform: translateX(6px);
+        }
+
+        .footer {
+            padding: 24px 48px 40px;
+            color: #4f6573;
+            border-top: 1px solid #d8e3ec;
+            background: #fafcfd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .github-corner {
+            color: #1b3b4f;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: white;
+            border-radius: 40px;
+            border: 1px solid #bdd3e0;
+            transition: all 0.2s;
+        }
+
+        .github-corner:hover {
+            background: #e3f0f7;
+            border-color: #31849c;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                padding: 30px 24px;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .projects {
+                padding: 30px 24px;
+            }
+            .footer {
+                padding: 24px 24px 30px;
+            }
+        }
+    </style>
+</head>
 <body>
-<a href="https://arostov.github.io/dacha/fence/">Забор</a>
-<a href="https://arostov.github.io/dacha/road/">Забор</a>
+<div class="container">
+    <div class="header">
+        <h1>🏡 Дачные проекты</h1>
+        <p>Строительство и благоустройство в Лужском районе</p>
+    </div>
+
+    <div class="projects">
+        <!-- Карточка проекта дороги -->
+        <a href="road/index.html" class="project-card">
+            <div class="project-icon">🛣️</div>
+            <div class="project-title">Подъездная дорога</div>
+            <div class="project-description">
+                Детальный план строительства дороги 40×5 м.
+                Смета, материалы, пошаговая инструкция для сезонной летней дороги.
+            </div>
+            <div class="project-meta">
+                <span>📍 Луга</span>
+                <span>📐 40×5 м</span>
+                <span class="arrow">→</span>
+            </div>
+        </a>
+
+        <!-- Карточка проекта забора (плейсхолдер, можно будет заполнить позже) -->
+        <a href="fence/index.html" class="project-card">
+            <div class="project-icon">🪵</div>
+            <div class="project-title">Забор и ограждения</div>
+            <div class="project-description">
+                Проект забора по периметру участка. Материалы, расчёты, варианты исполнения.
+            </div>
+            <div class="project-meta">
+                <span>📐 в разработке</span>
+                <span class="arrow">→</span>
+            </div>
+        </a>
+
+        <!-- Можно добавить карточку для будущих проектов -->
+        <div class="project-card" style="opacity: 0.7; background: #f8fafc; cursor: default; border: 1px dashed #b0c9d7;">
+            <div class="project-icon">📋</div>
+            <div class="project-title">Ещё проект</div>
+            <div class="project-description">
+                Место для будущих идей — баня, беседка, ландшафт.
+            </div>
+            <div class="project-meta">
+                <span>⏳ скоро</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>🌱 Все проекты для дачи в Ленинградской области</span>
+        <a href="https://github.com/ваш-логин/dacha" target="_blank" rel="noopener" class="github-corner">
+            <span>📁 GitHub</span>
+            <span style="font-size: 1.2rem;">↗</span>
+        </a>
+    </div>
+</div>
+
+<!-- Небольшой скрипт для корректной работы GitHub Pages -->
+<script>
+    // Автоматически подставляет базовый href, если нужно (для вложенных путей)
+    (function() {
+        // Проверяем, что мы не в подпапке уже (на случай, если кто-то откроет index.html из подпапки)
+        if (window.location.pathname.includes('/road/') || window.location.pathname.includes('/fence/')) {
+            return;
+        }
+
+        // Для главной страницы ничего не делаем, ссылки и так относительные
+        console.log('Главная страница дачных проектов');
+    })();
+</script>
 </body>
 </html>
