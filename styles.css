@@ -1,0 +1,305 @@
+/* styles.css - общий стиль для всех страниц дачных проектов */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+    color: #1e2b37;
+}
+
+/* Общий контейнер */
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 48px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Шапка (общая для всех страниц) */
+.site-header {
+    background: linear-gradient(135deg, #1b3b4f 0%, #0f2a36 100%);
+    color: white;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    transition: opacity 0.2s;
+}
+
+.logo a:hover {
+    opacity: 0.9;
+}
+
+.logo-icon {
+    font-size: 2.2rem;
+    background: rgba(255,255,255,0.1);
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 40px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.2s;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-link:hover {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border-color: rgba(255,255,255,0.3);
+}
+
+.nav-link.active {
+    background: #22738a;
+    color: white;
+    border-color: #31849c;
+}
+
+/* Контент страницы */
+.content {
+    padding: 32px;
+}
+
+/* Заголовки разделов (как на странице дороги) */
+.section {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #dce5ec;
+    padding-bottom: 24px;
+}
+
+.section:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: #0f2a36;
+    margin-bottom: 20px;
+}
+
+.section-title .step-num {
+    background: #22738a;
+    color: white;
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 60px;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+/* Карточки и сетки */
+.grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.card {
+    background: #f8fafd;
+    border-radius: 24px;
+    padding: 22px 24px;
+    border: 1px solid #dee9f0;
+}
+
+.card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1a485b;
+    border-left: 5px solid #31849c;
+    padding-left: 16px;
+}
+
+/* Таблицы */
+.table-wrap {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 20px;
+    border: 1px solid #d2e0e9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th {
+    background: #e5f0f5;
+    font-weight: 600;
+    padding: 16px 12px;
+    text-align: left;
+    color: #04313f;
+}
+
+td, th {
+    padding: 14px 12px;
+    border-bottom: 1px solid #d2e0e9;
+}
+
+tr:last-child td {
+    border-bottom: 0;
+}
+
+/* Списки параметров */
+.param-list {
+    list-style: none;
+}
+
+.param-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed #cbd8e3;
+    font-size: 1.1rem;
+}
+
+.param-list li:last-child {
+    border-bottom: 0;
+}
+
+.badge {
+    background: white;
+    padding: 4px 14px;
+    border-radius: 40px;
+    font-weight: 600;
+    color: #114455;
+    border: 1px solid #b6cfdd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* Предупреждения и заметки */
+.warning {
+    background: #fef3e0;
+    border-radius: 20px;
+    padding: 14px 22px;
+    border: 1px solid #f7c46c;
+    margin: 20px 0;
+    font-weight: 500;
+}
+
+.price-note {
+    background: #fff2e0;
+    border-left: 6px solid #e68a2e;
+    padding: 18px 24px;
+    border-radius: 20px;
+    margin-top: 24px;
+    font-size: 1.05rem;
+}
+
+/* Подвал */
+.site-footer {
+    background: #fafcfd;
+    border-top: 1px solid #d8e3ec;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: #4f6573;
+}
+
+.github-corner {
+    color: #1b3b4f;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: white;
+    border-radius: 40px;
+    border: 1px solid #bdd3e0;
+    transition: all 0.2s;
+}
+
+.github-corner:hover {
+    background: #e3f0f7;
+    border-color: #31849c;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 10px;
+        border-radius: 24px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .site-header, .site-footer {
+        padding: 20px;
+    }
+}
