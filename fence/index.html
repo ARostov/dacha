@@ -6,7 +6,7 @@
     <title>Забор + ворота — Луга</title>
     <link rel="stylesheet" href="../styles.css">
     <style>
-        /* Стили для табов (минимальные, в духе вашего CSS) */
+        /* Стили для табов */
         .tabs {
             display: flex;
             gap: 10px;
@@ -39,7 +39,7 @@
         .tab-content.active {
             display: block;
         }
-        /* Стили для шагов */
+        /* Карточки шагов */
         .step-card {
             background: #f8fafd;
             border-radius: 24px;
@@ -84,6 +84,24 @@
         .step-card-content li {
             margin: 6px 0;
         }
+        /* Чек-лист */
+        .checklist {
+            background: #f0f7fb;
+            border-radius: 20px;
+            padding: 20px 24px;
+            border: 1px solid #cfe3ed;
+            margin-top: 20px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 0.95rem;
+        }
+        .checklist-item input[type="checkbox"] {
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -100,6 +118,7 @@
             <a href="../index.html" class="nav-link">Главная</a>
             <a href="../roads/index.html" class="nav-link">Дороги</a>
             <a href="index.html" class="nav-link active">Забор</a>
+            <a href="../fence2/index.html" class="nav-link active">Забор2</a>
         </nav>
     </header>
 
@@ -112,7 +131,7 @@
             </h1>
             <p><strong>Участок:</strong> г. Луга • супесь сильнопучинистая • высокий УГВ • нет точки сброса воды<br>
                 <strong>Заполнение:</strong> металлоштакетник М-профиль, двусторонний, в шахматном порядке (75%)<br>
-                <strong>Шаг столбов:</strong> 2.5 м • <strong>Лаги:</strong> 2 ряда с обеих сторон</p>
+                <strong>Шаг столбов:</strong> 2.5 м • <strong>Лаги:</strong> 2 ряда с обеих сторон, плашмя</p>
 
             <div class="warning">
                 ⚠️ <strong>Критически важно для ваших условий:</strong> глубина ≥2.0–2.2 м (ниже промерзания), без бетонной «юбки» вокруг столба, засыпка ПГС вместо щебня, ворота на винтовых сваях SV-133.
@@ -124,6 +143,7 @@
             <button class="tab-btn active" onclick="openTab(event, 'steps')">📋 Этапы работ</button>
             <button class="tab-btn" onclick="openTab(event, 'materials')">🧱 Материалы и смета</button>
             <button class="tab-btn" onclick="openTab(event, 'principles')">🔑 Принципы</button>
+            <button class="tab-btn" onclick="openTab(event, 'checklist')">✅ Чек-лист</button>
         </div>
 
         <!-- ТАБ 1: ЭТАПЫ РАБОТ -->
@@ -184,12 +204,15 @@
                     <h3 class="step-card-title">Установка рядовых столбов (забор)</h3>
                 </div>
                 <div class="step-card-content">
-                    <p><strong>Труба 60×60×3 мм, длина ~4.0 м.</strong></p>
+                    <p><strong>Труба 60×60×3 мм, 6 м (раскрой: 4.0 м столб + 2.0 м остаток).</strong></p>
                     <ul>
+                        <li>Купить 15 труб × 6 м, распилить на 15 × 4.0 м + 15 × 2.0 м (остатки на усиление).</li>
                         <li>Низ трубы заварить пластиной 60×60×4 мм.</li>
                         <li>Обработать подземную часть + 20 см выше битумной мастикой.</li>
                         <li>Вставить столб, выставить вертикаль уровнем, зафиксировать клиньями.</li>
                         <li>Над землёй ровно 1.7–1.8 м (проверить шнуром/лазером).</li>
+                        <li><strong>Верх трубы закрыть заглушкой 60×60 мм!</strong></li>
+                        <li><strong>Торцы после резки зачистить и покрасить!</strong></li>
                     </ul>
                 </div>
             </div>
@@ -234,13 +257,16 @@
                     <h3 class="step-card-title">Монтаж столбов ворот и сварка</h3>
                 </div>
                 <div class="step-card-content">
-                    <p><strong>Труба 80×80×3 мм (вставляется в SV-133 или на оголовок).</strong></p>
+                    <p><strong>Труба 80×80×3 мм, 6 м (раскрой: 3.5 м столб + 2.5 м остаток).</strong></p>
                     <ul>
+                        <li>Купить 2 трубы × 6 м, распилить на 2 × 3.5 м + 2 × 2.5 м (остатки на усиление).</li>
                         <li>Зазор между трубой и сваей заполнить ЦПС М300 с уплотнением.</li>
                         <li>Приварить закладные под петли: пластины 120×120×5 мм, по 3 на столб.</li>
                         <li>Сварщик варит каркас ворот (две створки по 2.0×1.5 м) и калитки (1 м).</li>
                         <li><strong>Жёсткость створок:</strong> косынки 100×100×4 мм в углах (вместо диагонали).</li>
                         <li>Петли: с подшипником, ≥120 кг/пара, 3 шт на створку.</li>
+                        <li><strong>Верх трубы закрыть заглушкой 80×80 мм!</strong></li>
+                        <li><strong>Торцы после резки зачистить и покрасить!</strong></li>
                     </ul>
                     <div class="warning">⚠️ Зазор снизу ворот: 15–20 см (не 5–10 см!) из-за высокого УГВ и пучения.</div>
                 </div>
@@ -252,13 +278,17 @@
                     <h3 class="step-card-title">Монтаж лаг на забор (2 стороны!)</h3>
                 </div>
                 <div class="step-card-content">
-                    <p><strong>Труба 40×20×2 мм, 2 ряда (верх/низ), с обеих сторон.</strong></p>
+                    <p><strong>Труба 40×20×2 мм, 6 м, 2 ряда (верх/низ), с обеих сторон, плашмя (40 мм горизонтально).</strong></p>
                     <ul>
                         <li>На каждый рядовой столб крепим по 2 кронштейна с каждой стороны (итого 4 на столб).</li>
-                        <li>Вставляем лаги, фиксируем саморезами/сваркой.</li>
+                        <li>Кронштейн X-образный для столба 60×60, графитовый серый (180 ₽/шт).</li>
+                        <li><strong>Важно:</strong> проверить, что шляпки саморезов (крепление к столбу) не мешают укладке лаг!</li>
+                        <li>Крепление к столбу: саморезы 5.5×25 мм (4 шт на кронштейн).</li>
+                        <li>Крепление лаг: саморезы 5.5×19 мм (4 шт на кронштейн).</li>
                         <li>Проверяем горизонталь уровнем (шнур по верху).</li>
                         <li>Стыкуем лаги на столбах (в одном кронштейне).</li>
                     </ul>
+                    <div class="warning">⚠️ Важно: лаги укладываем плашмя (40 мм горизонтально) — так подходит кронштейн и саморез 19 мм не пройдёт насквозь!</div>
                 </div>
             </div>
 
@@ -270,11 +300,11 @@
                 <div class="step-card-content">
                     <p><strong>М‑образный штакетник 2 м, ~400 шт (заполнение 75%).</strong></p>
                     <ul>
-                        <li>Саморезами 5.5×25 мм с EPDM-шайбой (4 шт на планку).</li>
+                        <li>Саморезами 5.5×19 мм с EPDM-шайбой (4 шт на планку).</li>
                         <li>Крепим с двух сторон в шахматном порядке (вразбежку).</li>
                         <li>Использовать шаблон для равномерного зазора.</li>
                     </ul>
-                    <div class="warning">✅ Шаблон: кусок рейки шириной 75% от ширины планки.</div>
+                    <div class="warning">✅ Шаблон: кусок рейки шириной 75% от ширины планки.<br>⚠️ Саморезы 19 мм — не пройдут насквозь через лагу 40×20!</div>
                 </div>
             </div>
 
@@ -287,7 +317,7 @@
                     <p><strong>Грунт-эмаль 3-в-1, кисти.</strong></p>
                     <ul>
                         <li>Зачистить и покрасить сварные швы.</li>
-                        <li>Подкрасить торцы труб, места крепежа.</li>
+                        <li>Подкрасить торцы труб, места крепежа, царапины цинка.</li>
                         <li>Навесить створки, отрегулировать зазоры (сбоку 3–5 мм, снизу 15–20 см).</li>
                         <li>Проверить плавность хода, при необходимости подтянуть петли.</li>
                     </ul>
@@ -312,16 +342,16 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Столбы рядовые 60×60×3 мм, 4.0 м</td>
+                        <td>Труба 60×60×3 мм, 6 м (раскрой на 4.0 м)</td>
                         <td>15 шт</td>
-                        <td>~1 600 ₽</td>
-                        <td>24 000 ₽</td>
+                        <td>~2 000 ₽</td>
+                        <td>30 000 ₽</td>
                     </tr>
                     <tr>
-                        <td>Столбы воротные 80×80×3 мм, 3.5 м</td>
+                        <td>Труба 80×80×3 мм, 6 м (раскрой на 3.5 м)</td>
                         <td>2 шт</td>
-                        <td>~2 100 ₽</td>
-                        <td>4 200 ₽</td>
+                        <td>~2 600 ₽</td>
+                        <td>5 200 ₽</td>
                     </tr>
                     <tr>
                         <td>Сваи винтовые SV-133, 2.2 м</td>
@@ -348,7 +378,7 @@
                         <td>3 400 ₽</td>
                     </tr>
                     <tr>
-                        <td>Х-кронштейны (2 стороны × 15 столбов × 2 лаги)</td>
+                        <td>Кронштейн X-образный для столба 60×60 (Петрович)</td>
                         <td>60 шт</td>
                         <td>~180 ₽</td>
                         <td>10 800 ₽</td>
@@ -360,14 +390,32 @@
                         <td>78 400 ₽</td>
                     </tr>
                     <tr>
-                        <td>Саморезы 5.5×25 мм с EPDM (уп. 300 шт)</td>
-                        <td>6 уп.</td>
+                        <td>Саморезы 5.5×19 мм с EPDM (уп. 250 шт)</td>
+                        <td>8 уп.</td>
                         <td>~890 ₽</td>
-                        <td>5 340 ₽</td>
+                        <td>7 120 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Саморезы 5.5×25 мм с EPDM (уп. 250 шт)</td>
+                        <td>1 уп.</td>
+                        <td>~890 ₽</td>
+                        <td>890 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Заглушки 60×60 мм пластиковые</td>
+                        <td>15 шт</td>
+                        <td>~50 ₽</td>
+                        <td>750 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Заглушки 80×80 мм пластиковые</td>
+                        <td>2 шт</td>
+                        <td>~60 ₽</td>
+                        <td>120 ₽</td>
                     </tr>
                     <tr style="background: #e5f0f5; font-weight: 600;">
                         <td colspan="3">ПРОМЕЖУТОЧНЫЙ ИТОГ (металл+крепёж)</td>
-                        <td>159 140 ₽</td>
+                        <td>170 680 ₽</td>
                     </tr>
                     </tbody>
                 </table>
@@ -410,7 +458,7 @@
                     </tr>
                     <tr>
                         <td>Грунт-эмаль по металлу 3-в-1</td>
-                        <td>6 л</td>
+                        <td>8 л</td>
                         <td>~2 500 ₽</td>
                         <td>2 500 ₽</td>
                     </tr>
@@ -426,9 +474,15 @@
                         <td>~2 000 ₽</td>
                         <td>2 000 ₽</td>
                     </tr>
+                    <tr>
+                        <td>Диски отрезные/зачистные Ø125 мм</td>
+                        <td>10 шт</td>
+                        <td>~60 ₽</td>
+                        <td>600 ₽</td>
+                    </tr>
                     <tr style="background: #e5f0f5; font-weight: 600;">
                         <td colspan="3">ИТОГО расходники</td>
-                        <td>11 120 ₽</td>
+                        <td>11 720 ₽</td>
                     </tr>
                     </tbody>
                 </table>
@@ -484,11 +538,12 @@
             </div>
 
             <div class="price-note">
-                <strong>📊 ОБЩАЯ СМЕТА (материалы): ~178 160 ₽</strong><br><br>
-                ➕ Доставка: ~4 000–6 000 ₽<br>
+                <strong>📊 ОБЩАЯ СМЕТА (материалы): ~190 300 ₽</strong><br><br>
+                ➕ Доставка (длинномер для 6м труб): ~6 000–8 000 ₽<br>
                 ➕ Работа сварщика (1–2 дня): ~20 000–30 000 ₽<br>
-                ➕ Аренда мотобура (2–3 дня): ~4 000–6 000 ₽<br><br>
-                <strong>🎯 ФИНАЛ: ~206 000–220 000 ₽</strong>
+                ➕ Аренда мотобура (2–3 дня): ~4 000–6 000 ₽<br>
+                ➕ Резерв 5% на ошибки/брак: ~9 500 ₽<br><br>
+                <strong>🎯 ФИНАЛ: ~230 000–244 000 ₽</strong>
             </div>
 
         </div>
@@ -504,8 +559,11 @@
                         <li><span>Битум + заглушка</span> <span class="badge">гидроизоляция</span></li>
                         <li><span>ПГС, не бетон «юбкой»</span> <span class="badge">мягкий дренаж</span></li>
                         <li><span>Зазор снизу 15–20 см</span> <span class="badge">компенсация пучения</span></li>
-                        <li><span>Лаги с 2 сторон</span> <span class="badge">для шахматки</span></li>
+                        <li><span>Лаги с 2 сторон, плашмя</span> <span class="badge">для шахматки</span></li>
                         <li><span>Ворота на SV-133</span> <span class="badge">надёжность</span></li>
+                        <li><span>Саморезы 19 мм</span> <span class="badge">не пройдут насквозь</span></li>
+                        <li><span>Tek-4 для 2 мм стали</span> <span class="badge">Daxmer</span></li>
+                        <li><span>Трубы 6 м с раскроем</span> <span class="badge">реально купить</span></li>
                     </ul>
                 </div>
 
@@ -516,14 +574,109 @@
                         <li><span>Трубы 60×60 для ворот</span> <span class="badge">только 80×80</span></li>
                         <li><span>Бетонная отмостка вокруг</span> <span class="badge">ловушка для льда</span></li>
                         <li><span>Экономить на глубине</span> <span class="badge">1.5 м недостаточно</span></li>
-                        <li><span>Односторонние лаги</span> <span class="badge">не для шахматки</span></li>
-                        <li><span>ЦПС вместо бетона в сваях</span> <span class="badge">только М300</span></li>
+                        <li><span>Саморезы 25 мм для штакетника</span> <span class="badge">пройдут насквозь!</span></li>
+                        <li><span>Лаги на ребро</span> <span class="badge">не подойдёт кронштейн</span></li>
+                        <li><span>No-name саморезы</span> <span class="badge">тупой бур = ад</span></li>
+                        <li><span>Оставлять торцы без защиты</span> <span class="badge">ржавчина!</span></li>
                     </ul>
                 </div>
             </div>
 
             <div class="warning" style="margin-top: 30px;">
                 💡 <strong>Проверка качества:</strong> после монтажа подождать 3–5 дней перед нагрузкой (набор прочности бетона в сваях). Весной проверить вертикаль столбов — если есть микро-подъём, отрегулировать петли.
+            </div>
+
+        </div>
+
+        <!-- ТАБ 4: ЧЕК-ЛИСТ -->
+        <div id="checklist" class="tab-content">
+
+            <div class="checklist">
+                <h3 style="color: #1a485b; margin-bottom: 16px;">📋 Перед заказом материалов</h3>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk1">
+                    <label for="chk1"><strong>Проверить кронштейн:</strong> уточнить у Петровича, не мешают ли шляпки саморезов (крепление к столбу) укладке лаг</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk2">
+                    <label for="chk2"><strong>Купить 1 кронштейн на пробу</strong> перед заказом 60 шт</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk3">
+                    <label for="chk3"><strong>Заглушки:</strong> 60×60 мм (15 шт) + 80×80 мм (2 шт)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk4">
+                    <label for="chk4"><strong>Саморезы:</strong> 5.5×19 мм (8 уп.) + 5.5×25 мм (1 уп.), Tek-4, Daxmer или аналог</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk5">
+                    <label for="chk5"><strong>Расходники для сварки:</strong> диски отрезные/зачистные Ø125 мм (10 шт)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk6">
+                    <label for="chk6"><strong>Краска:</strong> грунт-эмаль 3-в-1, 8 л (с запасом на швы и царапины)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk7">
+                    <label for="chk7"><strong>Шаблон для штакетника:</strong> рейка 75% ширины планки (сделать самому)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk8">
+                    <label for="chk8"><strong>Резерв:</strong> заложить 5–10% сметы (~9 500–15 000 ₽) на брак/ошибки</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk9">
+                    <label for="chk9"><strong>Доставка:</strong> заказать длинномер для 6м труб (не влезает в Газель!)</label>
+                </div>
+            </div>
+
+            <div class="checklist" style="margin-top: 20px;">
+                <h3 style="color: #1a485b; margin-bottom: 16px;">🛠️ Перед началом работ</h3>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk10">
+                    <label for="chk10"><strong>Инструмент:</strong> шуруповёрт 18V+, бита PH2/PZ2, магнитный держатель</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk11">
+                    <label for="chk11"><strong>Бур:</strong> проверить длину (1.4 м), найти удлинитель или план Б с кувалдой</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk12">
+                    <label for="chk12"><strong>Уровень:</strong> лазерный нивелир + пузырьковый</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk13">
+                    <label for="chk13"><strong>Трамбовка:</strong> ручная или вибро (для ПГС)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk14">
+                    <label for="chk14"><strong>Сварщик:</strong> договориться на 1–2 дня, проверить наличие маски/краг</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk15">
+                    <label for="chk15"><strong>Раскрой труб:</strong> разметить 6м → 4м + 2м (забор) и 3.5м + 2.5м (ворота)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="chk16">
+                    <label for="chk16"><strong>Защита торцов:</strong> зачистить и покрасить все срезы после раскроя!</label>
+                </div>
             </div>
 
         </div>
