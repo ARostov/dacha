@@ -3,338 +3,559 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Забор 30 м + распашные ворота 4 м + калитка</title>
+    <title>Забор + ворота — Луга</title>
+    <link rel="stylesheet" href="../styles.css">
     <style>
-        :root {
-            --primary: #2c5f2d;
-            --secondary: #4a7c59;
-            --accent: #e67e22;
-            --light: #f8f9fa;
-            --dark: #2c3e50;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background: #fff;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            color: var(--primary);
-            border-bottom: 3px solid var(--secondary);
-            padding-bottom: 10px;
-            margin: 20px 0;
-            font-size: 1.8rem;
-        }
-        h2 {
-            color: var(--secondary);
-            margin: 25px 0 15px;
-            font-size: 1.4rem;
-        }
-        .subtitle {
-            color: #6c757d;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-        .step {
-            background: var(--light);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 20px 0;
-            border-left: 4px solid var(--accent);
-        }
-        .step-header {
+        /* Стили для табов (минимальные, в духе вашего CSS) */
+        .tabs {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(34,115,138,0.3);
+            color: #1b3b4f;
+        }
+        .tab-btn:hover {
+            background: rgba(34,115,138,0.1);
+        }
+        .tab-btn.active {
+            background: #22738a;
+            color: white;
+            border-color: #31849c;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        /* Стили для шагов */
+        .step-card {
+            background: #f8fafd;
+            border-radius: 24px;
+            padding: 22px 24px;
+            border: 1px solid #dee9f0;
+            margin-bottom: 20px;
+        }
+        .step-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .step-card-num {
+            background: #22738a;
+            color: white;
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
+            flex-shrink: 0;
         }
-        .step-num {
-            display: inline-block;
-            width: 28px;
-            height: 28px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 28px;
-            margin-right: 10px;
-        }
-        .step-content {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #dee2e6;
-        }
-        .tip {
-            background: #d4edda;
-            border-left: 4px solid var(--primary);
-            padding: 12px 16px;
-            margin: 15px 0;
-            border-radius: 0 4px 4px 0;
-            font-size: 0.95rem;
-        }
-        .warning {
-            background: #fff3cd;
-            border-left: 4px solid #c0392b;
-            padding: 12px 16px;
-            margin: 15px 0;
-            border-radius: 0 4px 4px 0;
-            font-size: 0.95rem;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            font-size: 0.95rem;
-        }
-        th, td {
-            padding: 10px 12px;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6;
-        }
-        th {
-            background: var(--secondary);
-            color: white;
+        .step-card-title {
+            font-size: 1.4rem;
             font-weight: 600;
+            color: #1a485b;
+            margin: 0;
         }
-        tr:hover { background: #f8f9fa; }
-        .price { text-align: right; font-weight: 500; }
-        .total {
-            background: var(--primary);
-            color: white;
-            font-weight: bold;
+        .step-card-content {
+            padding-left: 58px;
+            color: #1e2b37;
+            line-height: 1.6;
         }
-        ul { padding-left: 25px; margin: 10px 0; }
-        li { margin: 5px 0; }
-        .footer-note {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #dee2e6;
-            color: #6c757d;
-            font-size: 0.9rem;
+        .step-card-content ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        .step-card-content li {
+            margin: 6px 0;
         }
     </style>
 </head>
 <body>
 
-<h1>⛰️ Забор 30 м + распашные ворота 4 м + калитка</h1>
-<p class="subtitle">Участок — Луга • супесь сильнопучинистая • высокий УГВ • штакетник двусторонний в шахматном порядке • ворота на сваях SV-133 + столбы 80×80</p>
+<div class="container">
+    <header class="site-header">
+        <div class="logo">
+            <a href="../index.html">
+                <span class="logo-icon">🏡</span>
+                <span>Дачные проекты</span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="../index.html" class="nav-link">Главная</a>
+            <a href="../roads/index.html" class="nav-link">Дороги</a>
+            <a href="index.html" class="nav-link active">Забор</a>
+        </nav>
+    </header>
 
-<p>⏱️ 4–6 дней самостоятельной работы + 1 день сварщика на ворота. Все шаги с учётом геологии вашего участка.</p>
+    <main class="content">
 
-<div class="warning">
-    ⚠️ <strong>Важно для ваших условий:</strong> глубина ≥2.0–2.2 м (ниже промерзания), без бетонной «юбки» вокруг столба, засыпка ПГС вместо щебня.
+        <section class="section">
+            <h1 class="section-title">
+                <span class="step-num">🚧</span>
+                Забор 35 м + ворота 4 м + калитка 1 м
+            </h1>
+            <p><strong>Участок:</strong> г. Луга • супесь сильнопучинистая • высокий УГВ • нет точки сброса воды<br>
+                <strong>Заполнение:</strong> металлоштакетник М-профиль, двусторонний, в шахматном порядке (75%)<br>
+                <strong>Шаг столбов:</strong> 2.5 м • <strong>Лаги:</strong> 2 ряда с обеих сторон</p>
+
+            <div class="warning">
+                ⚠️ <strong>Критически важно для ваших условий:</strong> глубина ≥2.0–2.2 м (ниже промерзания), без бетонной «юбки» вокруг столба, засыпка ПГС вместо щебня, ворота на винтовых сваях SV-133.
+            </div>
+        </section>
+
+        <!-- ТАБЫ -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'steps')">📋 Этапы работ</button>
+            <button class="tab-btn" onclick="openTab(event, 'materials')">🧱 Материалы и смета</button>
+            <button class="tab-btn" onclick="openTab(event, 'principles')">🔑 Принципы</button>
+        </div>
+
+        <!-- ТАБ 1: ЭТАПЫ РАБОТ -->
+        <div id="steps" class="tab-content active">
+
+            <div class="step-card">
+                <div class="step-card-header">
+                    <span class="step-card-num">1</span>
+                    <h3 class="step-card-title">Разметка и подготовка</h3>
+                </div>
+                <div class="step-card-content">
+                    <p><strong>Что делаем:</strong> натягиваем шнур по линии забора, отмечаем крайние точки, ворота (4 м) и калитку (1 м).</p>
+                    <ul>
+                        <li>Колышки, шнурка, рулетка.</li>
+                        <li>Проверить диагонали проёма ворот (важно для сварщика!).</li>
+                        <li>Отметить места рядовых столбов с шагом 2.5 м.</li>
+                        <li>Учесть уклон — первый и последний столб выставить по лазерному уровню.</li>
+                    </ul>
+                    <div class="warning">✅ Совет: используй лазер + камеру телефона, если солнце мешает.</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-card-header">
+                    <span class="step-card-num">2</span>
+                    <h3 class="step-card-title">Бурение ям под рядовые столбы</h3>
+                </div>
+                <div class="step-card-content">
+                    <p><strong>Глубина 2.2 м, диаметр 200 мм.</strong></p>
+                    <ul>
+                        <li>Мотобур или ручной бур с удлинителем. Для 15 ям — 1–2 дня.</li>
+                        <li>Старайся держать вертикаль.</li>
+                        <li>Если попался камень — сместить лунку на 10–15 см или разбить долотом.</li>
+                        <li>На дно каждой ямы — 10 см щебня 20–40 мм для дренажа.</li>
+                    </ul>
+                    <div class="warning">💡 Если бур 1.4 м без удлинителя: пробурить 1.4 м, затем добить трубу кувалдой через деревянную проставку до суммарной глубины ≥1.8 м.</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-card-header">
+                    <span class="step-card-num">3</span>
+                    <h3 class="step-card-title">Зондирование арматурой (на камни)</h3>
+                </div>
+                <div class="step-card-content">
+                    <p><strong>Арматура 12 мм с заострённым концом.</strong></p>
+                    <ul>
+                        <li>Протыкаем дно каждой ямы на глубину ещё 30–50 см.</li>
+                        <li>Если упёрлись в камень — пробуем рядом или бурим глубже вручную.</li>
+                        <li>Это твой метод избежать сюрпризов при установке труб.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-card-header">
+                    <span class="step-card-num">4</span>
+                    <h3 class="step-card-title">Установка рядовых столбов (забор)</h3>
+                </div>
+                <div class="step-card-content">
+                    <p><strong>Труба 60×60×3 мм, длина ~4.0 м.</strong></p>
+                    <ul>
+                        <li>Низ трубы заварить пластиной 60×60×4 мм.</li>
+                        <li>Обработать подземную часть + 20 см выше битумной мастикой.</li>
+                        <li>Вставить столб, выставить вертикаль уровнем, зафиксировать клиньями.</li>
+                        <li>Над землёй ровно 1.7–1.8 м (проверить шнуром/лазером).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-card-header">
+                    <span class="step-card-num">5</span>
+                    <h3 class="step-card-title">Засыпка пазух ПГС с трамбовкой</h3>
+                </div>
+                <div class="step-card-content">
+                    <p><strong>ПГС (песчано-гравийная смесь 0–20 мм), не чистый щебень!</strong></p>
+                    <ul>
+                        <li>Засыпаем послойно, каждые 10–15 см проливаем водой и трамбуем (ручная трамбовка или брус).</li>
+                        <li><strong>Опционально:</strong> гильза из геотекстиля (плотность 200–300 г/м²) для защиты от заиливания.</li>
+                        <li>Верхний слой сделать конусом с уклоном ОТ столба (не бетон!).</li>
+                        <li>Для всех 15 рядовых столбов.</li>
+                    </ul>
+                    <div class="warning">⚠️ Не использовать бетонную «юбку» — в ваших условиях она треснёт и станет ловушкой для воды.</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-card-header">
+                    <span class="step-card-num">6</span>
+                    <h3 class="step-card-title">Установка свай под ворота (2 шт)</h3>
+                </div>
+                <div class="step-card-content">
+                    <p><strong>Винтовые сваи SV-133, длина 2.0–2.2 м.</strong></p>
+                    <ul>
+                        <li>Вкручиваем строго вертикально на глубину 2.0–2.2 м (ниже промерзания для Луги).</li>
+                        <li>По 1 свае под каждый воротный столб (левый и правый).</li>
+                        <li>Обрезаем по уровню: над землёй 10–15 см для оголовка.</li>
+                        <li>Заливаем внутрь <strong>ЦПС М300</strong> (Artemix, Vimos) с уплотнением арматурой.</li>
+                    </ul>
+                    <div class="warning">✅ Стартовая лунка под сваю — буром 200 мм на 0.5–0.7 м, дальше свая сама «размоет» грунт.</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-card-header">
+                    <span class="step-card-num">7</span>
+                    <h3 class="step-card-title">Монтаж столбов ворот и сварка</h3>
+                </div>
+                <div class="step-card-content">
+                    <p><strong>Труба 80×80×3 мм (вставляется в SV-133 или на оголовок).</strong></p>
+                    <ul>
+                        <li>Зазор между трубой и сваей заполнить ЦПС М300 с уплотнением.</li>
+                        <li>Приварить закладные под петли: пластины 120×120×5 мм, по 3 на столб.</li>
+                        <li>Сварщик варит каркас ворот (две створки по 2.0×1.5 м) и калитки (1 м).</li>
+                        <li><strong>Жёсткость створок:</strong> косынки 100×100×4 мм в углах (вместо диагонали).</li>
+                        <li>Петли: с подшипником, ≥120 кг/пара, 3 шт на створку.</li>
+                    </ul>
+                    <div class="warning">⚠️ Зазор снизу ворот: 15–20 см (не 5–10 см!) из-за высокого УГВ и пучения.</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-card-header">
+                    <span class="step-card-num">8</span>
+                    <h3 class="step-card-title">Монтаж лаг на забор (2 стороны!)</h3>
+                </div>
+                <div class="step-card-content">
+                    <p><strong>Труба 40×20×2 мм, 2 ряда (верх/низ), с обеих сторон.</strong></p>
+                    <ul>
+                        <li>На каждый рядовой столб крепим по 2 кронштейна с каждой стороны (итого 4 на столб).</li>
+                        <li>Вставляем лаги, фиксируем саморезами/сваркой.</li>
+                        <li>Проверяем горизонталь уровнем (шнур по верху).</li>
+                        <li>Стыкуем лаги на столбах (в одном кронштейне).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-card-header">
+                    <span class="step-card-num">9</span>
+                    <h3 class="step-card-title">Крепление штакетника (двусторонний, шахматка)</h3>
+                </div>
+                <div class="step-card-content">
+                    <p><strong>М‑образный штакетник 2 м, ~400 шт (заполнение 75%).</strong></p>
+                    <ul>
+                        <li>Саморезами 5.5×25 мм с EPDM-шайбой (4 шт на планку).</li>
+                        <li>Крепим с двух сторон в шахматном порядке (вразбежку).</li>
+                        <li>Использовать шаблон для равномерного зазора.</li>
+                    </ul>
+                    <div class="warning">✅ Шаблон: кусок рейки шириной 75% от ширины планки.</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-card-header">
+                    <span class="step-card-num">10</span>
+                    <h3 class="step-card-title">Покраска, финиш, навешивание</h3>
+                </div>
+                <div class="step-card-content">
+                    <p><strong>Грунт-эмаль 3-в-1, кисти.</strong></p>
+                    <ul>
+                        <li>Зачистить и покрасить сварные швы.</li>
+                        <li>Подкрасить торцы труб, места крепежа.</li>
+                        <li>Навесить створки, отрегулировать зазоры (сбоку 3–5 мм, снизу 15–20 см).</li>
+                        <li>Проверить плавность хода, при необходимости подтянуть петли.</li>
+                    </ul>
+                    <div class="warning">✅ Подождать 3–5 дней перед активной эксплуатацией (набор прочности бетона в сваях).</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ТАБ 2: МАТЕРИАЛЫ И СМЕТА -->
+        <div id="materials" class="tab-content">
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Позиция</th>
+                        <th>Кол-во</th>
+                        <th>Цена ед.</th>
+                        <th>Сумма</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Столбы рядовые 60×60×3 мм, 4.0 м</td>
+                        <td>15 шт</td>
+                        <td>~1 600 ₽</td>
+                        <td>24 000 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Столбы воротные 80×80×3 мм, 3.5 м</td>
+                        <td>2 шт</td>
+                        <td>~2 100 ₽</td>
+                        <td>4 200 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Сваи винтовые SV-133, 2.2 м</td>
+                        <td>2 шт</td>
+                        <td>~5 500 ₽</td>
+                        <td>11 000 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Оголовки под 80×80 мм</td>
+                        <td>2 шт</td>
+                        <td>~800 ₽</td>
+                        <td>1 600 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Лаги забор 40×20×2 мм, 6 м (2 стороны!)</td>
+                        <td>24 шт</td>
+                        <td>~850 ₽</td>
+                        <td>20 400 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Лаги ворота/калитка 40×20×2 мм, 6 м</td>
+                        <td>4 шт</td>
+                        <td>~850 ₽</td>
+                        <td>3 400 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Х-кронштейны (2 стороны × 15 столбов × 2 лаги)</td>
+                        <td>60 шт</td>
+                        <td>~180 ₽</td>
+                        <td>10 800 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Металлоштакетник М-профиль, 2 м</td>
+                        <td>~400 шт</td>
+                        <td>~196 ₽</td>
+                        <td>78 400 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Саморезы 5.5×25 мм с EPDM (уп. 300 шт)</td>
+                        <td>6 уп.</td>
+                        <td>~890 ₽</td>
+                        <td>5 340 ₽</td>
+                    </tr>
+                    <tr style="background: #e5f0f5; font-weight: 600;">
+                        <td colspan="3">ПРОМЕЖУТОЧНЫЙ ИТОГ (металл+крепёж)</td>
+                        <td>159 140 ₽</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Позиция</th>
+                        <th>Кол-во</th>
+                        <th>Цена</th>
+                        <th>Сумма</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>ПГС (песчано-гравийная смесь 0–20 мм)</td>
+                        <td>2.0 м³</td>
+                        <td>~1 200 ₽/м³</td>
+                        <td>2 400 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Щебень 20–40 мм (на дно лунок)</td>
+                        <td>0.4 м³</td>
+                        <td>~1 800 ₽/м³</td>
+                        <td>720 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>ЦПС М300 «Артемикс» (Vimos), 25 кг</td>
+                        <td>3 мешка</td>
+                        <td>~300 ₽</td>
+                        <td>900 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Битумная мастика (для низа столбов)</td>
+                        <td>10 кг</td>
+                        <td>~2 000 ₽</td>
+                        <td>2 000 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Грунт-эмаль по металлу 3-в-1</td>
+                        <td>6 л</td>
+                        <td>~2 500 ₽</td>
+                        <td>2 500 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Геотекстиль 200 г/м² (опционально)</td>
+                        <td>12 м²</td>
+                        <td>~50 ₽/м²</td>
+                        <td>600 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Электроды (УОНИ или МР-3, 3–4 мм)</td>
+                        <td>5 кг</td>
+                        <td>~2 000 ₽</td>
+                        <td>2 000 ₽</td>
+                    </tr>
+                    <tr style="background: #e5f0f5; font-weight: 600;">
+                        <td colspan="3">ИТОГО расходники</td>
+                        <td>11 120 ₽</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Позиция</th>
+                        <th>Кол-во</th>
+                        <th>Цена</th>
+                        <th>Сумма</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Петли усиленные с подшипником (≥120 кг)</td>
+                        <td>3 пары</td>
+                        <td>~900 ₽/пара</td>
+                        <td>2 700 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Закладные под петли: 120×120×5 мм</td>
+                        <td>6 шт</td>
+                        <td>~200 ₽</td>
+                        <td>1 200 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Косынки для жёсткости: 100×100×4 мм</td>
+                        <td>12 шт</td>
+                        <td>~150 ₽</td>
+                        <td>1 800 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Засовы для ворот, компл.</td>
+                        <td>2 компл.</td>
+                        <td>~700 ₽</td>
+                        <td>1 400 ₽</td>
+                    </tr>
+                    <tr>
+                        <td>Замок/задвижка для калитки</td>
+                        <td>1 шт</td>
+                        <td>~800 ₽</td>
+                        <td>800 ₽</td>
+                    </tr>
+                    <tr style="background: #e5f0f5; font-weight: 600;">
+                        <td colspan="3">ИТОГО фурнитура</td>
+                        <td>7 900 ₽</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="price-note">
+                <strong>📊 ОБЩАЯ СМЕТА (материалы): ~178 160 ₽</strong><br><br>
+                ➕ Доставка: ~4 000–6 000 ₽<br>
+                ➕ Работа сварщика (1–2 дня): ~20 000–30 000 ₽<br>
+                ➕ Аренда мотобура (2–3 дня): ~4 000–6 000 ₽<br><br>
+                <strong>🎯 ФИНАЛ: ~206 000–220 000 ₽</strong>
+            </div>
+
+        </div>
+
+        <!-- ТАБ 3: ПРИНЦИПЫ -->
+        <div id="principles" class="tab-content">
+
+            <div class="grid-2col">
+                <div class="card">
+                    <h3>✅ Что делаем</h3>
+                    <ul class="param-list">
+                        <li><span>Глубина ≥2.0–2.2 м</span> <span class="badge">ниже промерзания</span></li>
+                        <li><span>Битум + заглушка</span> <span class="badge">гидроизоляция</span></li>
+                        <li><span>ПГС, не бетон «юбкой»</span> <span class="badge">мягкий дренаж</span></li>
+                        <li><span>Зазор снизу 15–20 см</span> <span class="badge">компенсация пучения</span></li>
+                        <li><span>Лаги с 2 сторон</span> <span class="badge">для шахматки</span></li>
+                        <li><span>Ворота на SV-133</span> <span class="badge">надёжность</span></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>❌ Чего не делаем</h3>
+                    <ul class="param-list">
+                        <li><span>Бетонировать «якорь + щебень»</span> <span class="badge">риск выдавливания</span></li>
+                        <li><span>Трубы 60×60 для ворот</span> <span class="badge">только 80×80</span></li>
+                        <li><span>Бетонная отмостка вокруг</span> <span class="badge">ловушка для льда</span></li>
+                        <li><span>Экономить на глубине</span> <span class="badge">1.5 м недостаточно</span></li>
+                        <li><span>Односторонние лаги</span> <span class="badge">не для шахматки</span></li>
+                        <li><span>ЦПС вместо бетона в сваях</span> <span class="badge">только М300</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning" style="margin-top: 30px;">
+                💡 <strong>Проверка качества:</strong> после монтажа подождать 3–5 дней перед нагрузкой (набор прочности бетона в сваях). Весной проверить вертикаль столбов — если есть микро-подъём, отрегулировать петли.
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <em>Спецификация подготовлена с учётом геологии участка (Луга, супесь, высокий УГВ). Актуально на 2026 г.</em>
+        </div>
+        <a href="https://github.com/arostov/dacha" class="github-corner" target="_blank">
+            <span>📦</span>
+            <span>GitHub</span>
+        </a>
+    </footer>
 </div>
 
-<h2>📋 Пошаговый монтаж</h2>
-
-<div class="step">
-    <div class="step-header"><span class="step-num">1</span> Разметка и подготовка ▲</div>
-    <div class="step-content">
-        <p><strong>Что делаем:</strong> натягиваем шнур по линии забора, отмечаем крайние точки, ворота (4 м) и калитку (1 м).</p>
-        <ul>
-            <li>Колышки, шнурка, рулетка.</li>
-            <li>Проверить диагонали проёма ворот (важно для сварщика).</li>
-            <li>Отметить места рядовых столбов с шагом 2.5 м.</li>
-            <li>Учесть уклон — первый и последний столб выставить по лазерному уровню.</li>
-        </ul>
-        <p class="tip">✅ Совет: используй лазер + камеру телефона, если солнце мешает.</p>
-    </div>
-</div>
-
-<div class="step">
-    <div class="step-header"><span class="step-num">2</span> Бурение ям под рядовые столбы ▼</div>
-    <div class="step-content">
-        <p><strong>Глубина 2.2 м, диаметр 200 мм.</strong></p>
-        <ul>
-            <li>Мотобур или ручной бур с удлинителем. Для 15 ям — 1–2 дня.</li>
-            <li>Старайся держать вертикаль.</li>
-            <li>Если попался камень — сместить лунку на 10–15 см или разбить долотом.</li>
-        </ul>
-        <p class="tip">💡 Если бур 1.4 м без удлинителя: пробурить 1.4 м, затем добить трубу кувалдой через деревянную проставку до суммарной глубины ≥1.8 м.</p>
-    </div>
-</div>
-
-<div class="step">
-    <div class="step-header"><span class="step-num">3</span> Зондирование арматурой (на камни) ▼</div>
-    <div class="step-content">
-        <p><strong>Арматура 12 мм с заострённым концом.</strong></p>
-        <ul>
-            <li>Протыкаем дно каждой ямы на глубину ещё 30–50 см.</li>
-            <li>Если упёрлись в камень — пробуем рядом или бурим глубже вручную.</li>
-            <li>Это твой метод избежать сюрпризов при установке труб.</li>
-        </ul>
-    </div>
-</div>
-
-<div class="step">
-    <div class="step-header"><span class="step-num">4</span> Установка рядовых столбов (забор) ▼</div>
-    <div class="step-content">
-        <p><strong>Труба 60×60×3 мм, длина ~3.7–4.0 м.</strong></p>
-        <ul>
-            <li>Низ трубы заварить пластиной 60×60×4 мм.</li>
-            <li>Обработать подземную часть + 20 см выше битумной мастикой.</li>
-            <li>На дно ямы — 10 см щебня 20–40 мм для дренажа.</li>
-            <li>Вставить столб, выставить вертикаль уровнем, зафиксировать клиньями.</li>
-            <li>Над землёй ровно 1.7–1.8 м (проверить шнуром/лазером).</li>
-        </ul>
-    </div>
-</div>
-
-<div class="step">
-    <div class="step-header"><span class="step-num">5</span> Засыпка пазух ПГС с трамбовкой ▼</div>
-    <div class="step-content">
-        <p><strong>ПГС (песчано-гравийная смесь 0–20 мм), не чистый щебень!</strong></p>
-        <ul>
-            <li>Засыпаем послойно, каждые 10–15 см проливаем водой и трамбуем (ручная трамбовка или брус).</li>
-            <li><strong>Опционально:</strong> гильза из геотекстиля (плотность 200–300 г/м²) для защиты от заиливания.</li>
-            <li>Верхний слой сделать конусом с уклоном ОТ столба (не бетон!).</li>
-            <li>Для всех 15 рядовых столбов.</li>
-        </ul>
-        <p class="warning">⚠️ Не использовать бетонную «юбку» — в ваших условиях она треснёт и станет ловушкой для воды.</p>
-    </div>
-</div>
-
-<div class="step">
-    <div class="step-header"><span class="step-num">6</span> Установка свай под ворота (2 шт) ▼</div>
-    <div class="step-content">
-        <p><strong>Винтовые сваи SV-133, длина 2.0–2.2 м.</strong></p>
-        <ul>
-            <li>Вкручиваем строго вертикально на глубину 2.0–2.2 м (ниже промерзания для Луги).</li>
-            <li>По 1 свае под каждый воротный столб (левый и правый).</li>
-            <li>Обрезаем по уровню: над землёй 10–15 см для оголовка.</li>
-            <li>Заливаем внутрь <strong>ЦПС М300</strong> (Artemix, Vimos) с уплотнением арматурой.</li>
-        </ul>
-        <p class="tip">✅ Стартовая лунка под сваю — буром 200 мм на 0.5–0.7 м, дальше свая сама «размоет» грунт.</p>
-    </div>
-</div>
-
-<div class="step">
-    <div class="step-header"><span class="step-num">7</span> Монтаж столбов ворот и сварка ▼</div>
-    <div class="step-content">
-        <p><strong>Труба 80×80×3 мм (вставляется в SV-133 или на оголовок).</strong></p>
-        <ul>
-            <li>Зазор между трубой и сваей заполнить ЦПС М300 с уплотнением.</li>
-            <li>Приварить закладные под петли: пластины 120×120×5 мм, по 3 на столб.</li>
-            <li>Сварщик варит каркас ворот (две створки по 2.0×1.5 м) и калитки (1 м).</li>
-            <li><strong>Жёсткость створок:</strong> косынки 100×100×4 мм в углах (вместо диагонали).</li>
-            <li>Петли: с подшипником, ≥120 кг/пара, 3 шт на створку.</li>
-            <li>Следит за геометрией — проверяй диагонали перед окончательной сваркой.</li>
-        </ul>
-        <p class="warning">⚠️ Зазор снизу ворот: 15–20 см (не 5–10 см!) из-за высокого УГВ и пучения.</p>
-    </div>
-</div>
-
-<div class="step">
-    <div class="step-header"><span class="step-num">8</span> Монтаж лаг на забор через Х-кронштейны ▼</div>
-    <div class="step-content">
-        <p><strong>Труба 40×20×2 мм, 2 ряда (верх/низ).</strong></p>
-        <ul>
-            <li>На каждый рядовой столб крепим по 2 кронштейна (саморезы 5.5×25 или приварка).</li>
-            <li>Вставляем лаги, фиксируем саморезами/сваркой.</li>
-            <li>Проверяем горизонталь уровнем (шнур по верху).</li>
-            <li>Стыкуем лаги на столбах (в одном кронштейне).</li>
-        </ul>
-    </div>
-</div>
-
-<div class="step">
-    <div class="step-header"><span class="step-num">9</span> Крепление штакетника (двусторонний, шахматка) ▼</div>
-    <div class="step-content">
-        <p><strong>М‑образный штакетник 2 м, ~300 шт (заполнение 75%).</strong></p>
-        <ul>
-            <li>Саморезами 5.5×25 мм с EPDM-шайбой (4 шт на планку).</li>
-            <li>Крепим с двух сторон в шахматном порядке (вразбежку).</li>
-            <li>Использовать шаблон для равномерного зазора.</li>
-        </ul>
-        <p class="tip">✅ Шаблон: кусок рейки шириной 75% от ширины планки.</p>
-    </div>
-</div>
-
-<div class="step">
-    <div class="step-header"><span class="step-num">10</span> Покраска, финиш, навешивание ▼</div>
-    <div class="step-content">
-        <p><strong>Грунт-эмаль 3-в-1, кисти.</strong></p>
-        <ul>
-            <li>Зачистить и покрасить сварные швы.</li>
-            <li>Подкрасить торцы труб, места крепежа.</li>
-            <li>Навесить створки, отрегулировать зазоры (сбоку 3–5 мм, снизу 15–20 см).</li>
-            <li>Проверить плавность хода, при необходимости подтянуть петли.</li>
-        </ul>
-        <p class="tip">✅ Подождать 3–5 дней перед активной эксплуатацией (набор прочности бетона в сваях).</p>
-    </div>
-</div>
-
-<p class="tip"><strong>ЛАЙФХАК:</strong> При забивке труб используй деревянную проставку — не расклепаешь верх трубы 60×60×3.</p>
-
-<h2>🧱 Основной металл и крепёж</h2>
-
-<table>
-    <thead>
-    <tr><th>Позиция</th><th>Кол-во</th><th>Цена ед.</th><th class="price">Сумма</th></tr>
-    </thead>
-    <tbody>
-    <tr><td>Столбы рядовые 60×60×3 мм, 4.0 м</td><td>15 шт</td><td>~1 600 ₽</td><td class="price">24 000 ₽</td></tr>
-    <tr><td>Столбы воротные 80×80×3 мм, 3.5 м</td><td>2 шт</td><td>~2 100 ₽</td><td class="price">4 200 ₽</td></tr>
-    <tr><td>Сваи винтовые SV-133, 2.2 м</td><td>2 шт</td><td>~5 500 ₽</td><td class="price">11 000 ₽</td></tr>
-    <tr><td>Оголовки под 80×80 мм</td><td>2 шт</td><td>~800 ₽</td><td class="price">1 600 ₽</td></tr>
-    <tr><td>Лаги забор 40×20×2 мм, 6 м</td><td>12 шт</td><td>~850 ₽</td><td class="price">10 200 ₽</td></tr>
-    <tr><td>Лаги ворота/калитка 40×20×2 мм, 6 м</td><td>4 шт</td><td>~850 ₽</td><td class="price">3 400 ₽</td></tr>
-    <tr><td>Х-кронштейны (крепление лаг)</td><td>30 шт</td><td>~180 ₽</td><td class="price">5 400 ₽</td></tr>
-    <tr><td>Металлоштакетник М-обр., 2 м</td><td>~300 шт</td><td>~196 ₽</td><td class="price">58 800 ₽</td></tr>
-    <tr><td>Саморезы 5.5×25 мм с EPDM (уп. 300 шт)</td><td>4 уп.</td><td>~890 ₽</td><td class="price">3 560 ₽</td></tr>
-    <tr class="total"><td colspan="3">ПРОМЕЖУТОЧНЫЙ ИТОГ (металл+крепёж)</td><td class="price">122 160 ₽</td></tr>
-    </tbody>
-</table>
-
-<h2>⛽ Расходные материалы и стройхимия</h2>
-
-<table>
-    <thead>
-    <tr><th>Позиция</th><th>Кол-во</th><th>Цена</th><th class="price">Сумма</th></tr>
-    </thead>
-    <tbody>
-    <tr><td>ПГС (песчано-гравийная смесь 0–20 мм)</td><td>1.5 м³</td><td>~1 200 ₽/м³</td><td class="price">1 800 ₽</td></tr>
-    <tr><td>Щебень 20–40 мм (на дно лунок)</td><td>0.3 м³</td><td>~1 800 ₽/м³</td><td class="price">540 ₽</td></tr>
-    <tr><td>ЦПС М300 «Артемикс» (Vimos), 25 кг</td><td>3 мешка</td><td>~300 ₽</td><td class="price">900 ₽</td></tr>
-    <tr><td>Битумная мастика (для низа столбов)</td><td>10 кг</td><td>~2 000 ₽</td><td class="price">2 000 ₽</td></tr>
-    <tr><td>Грунт-эмаль по металлу 3-в-1</td><td>5 л</td><td>~2 500 ₽</td><td class="price">2 500 ₽</td></tr>
-    <tr><td>Геотекстиль 200 г/м² (опционально)</td><td>10 м²</td><td>~50 ₽/м²</td><td class="price">500 ₽</td></tr>
-    <tr><td>Электроды (УОНИ или МР-3, 3–4 мм)</td><td>5 кг</td><td>~2 000 ₽</td><td class="price">2 000 ₽</td></tr>
-    </tbody>
-</table>
-
-<h2>🔩 Фурнитура для ворот и калитки</h2>
-
-<table>
-    <thead>
-    <tr><th>Позиция</th><th>Кол-во</th><th>Цена</th><th class="price">Сумма</th></tr>
-    </thead>
-    <tbody>
-    <tr><td>Петли усиленные с подшипником (≥120 кг)</td><td>3 пары</td><td>~900 ₽/пара</td><td class="price">2 700 ₽</td></tr>
-    <tr><td>Закладные под петли: 120×120×5 мм</td><td>6 шт</td><td>~200 ₽</td><td class="price">1 200 ₽</td></tr>
-    <tr><td>Косынки для жёсткости: 100×100×4 мм</td><td>12 шт</td><td>~150 ₽</td><td class="price">1 800 ₽</td></tr>
-    <tr><td>Засовы (шпингалеты) для ворот, компл.</td><td>2 компл.</td><td>~700 ₽</td><td class="price">1 400 ₽</td></tr>
-    <tr><td>Ограничители открывания</td><td>2 шт</td><td>~400 ₽</td><td class="price">800 ₽</td></tr>
-    <tr><td>Задвижка/щеколда для калитки</td><td>1 шт</td><td>~300 ₽</td><td class="price">300 ₽</td></tr>
-    <tr><td>Замок накладной (опционально)</td><td>1 шт</td><td>~800 ₽</td><td class="price">800 ₽</td></tr>
-    </tbody>
-</table>
-
-<p class="tip"><strong>ОРИЕНТИР ВСЕГО (без доставки и сварщика): ≈ 140 300 ₽</strong></p>
-
-<p class="footer-note">💡 Добавь сюда доставку (~3–5 тыс.), работу сварщика (~15–20 тыс.) и аренду мотобура (~4–6 тыс.). <strong>Финал примерно 162–171 тыс. ₽</strong> — металл, штакетник, фурнитура, работа.</p>
-
-<p class="footer-note">✅ Лаги с двух сторон учтены (2 ряда на заборе, по 3 лаги на воротах/калитке). Зазор снизу ворот 15–20 см из-за пучения. Сварщик приваривает лаги к воротным столбам.</p>
-
-<div class="footer-note">
-    <em>Спецификация подготовлена с учётом геологии участка (Луга, супесь, высокий УГВ, нет точки сброса воды). Актуально на 2026 г. Цены ориентировочные, уточняйте в местных магазинах (Vimos, Петрович, Леруа).</em>
-</div>
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active");
+        }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+</script>
 
 </body>
 </html>
