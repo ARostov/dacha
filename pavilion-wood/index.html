@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проект Беседки 3х3 - Финальная Версия</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+
+        /* Tabs Styling */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+        }
+        .tab button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 20px;
+            transition: 0.3s;
+            font-size: 16px;
+            flex: 1;
+            font-weight: bold;
+            color: #555;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #2980b9;
+            color: white;
+        }
+        .tabcontent {
+            display: none;
+            padding: 25px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            animation: fadeEffect 0.5s;
+        }
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        /* Node Boxes */
+        .node-box {
+            background-color: #e8f6f3;
+            border-left: 5px solid #1abc9c;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 5px 5px 0;
+        }
+        .node-box h4 {
+            margin-top: 0;
+            color: #16a085;
+            font-size: 1.1em;
+        }
+        .node-detail {
+            background: #fff;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #d5f5e3;
+        }
+        .node-detail strong {
+            color: #16a085;
+        }
+
+        .warning {
+            background-color: #fdedec;
+            border-left: 5px solid #e74c3c;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            border-radius: 0 5px 5px 0;
+        }
+        .info {
+            background-color: #ebf5fb;
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            border-radius: 0 5px 5px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr.total-row {
+            background-color: #2980b9;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        tr.subtotal-row {
+            background-color: #f39c12;
+            color: white;
+            font-weight: bold;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+
+        .dimension {
+            font-family: 'Courier New', monospace;
+            background: #f39c12;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .tech-note {
+            background-color: #fef9e7;
+            border-left: 5px solid #f1c40f;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .price {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        .grand-total {
+            background-color: #27ae60;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .price-note {
+            background-color: #fef9e7;
+            border: 1px solid #f1c40f;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.9em;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Шапка -->
+    <header class="site-header">
+        <div class="logo">
+            <a href="../index.html">
+                <span class="logo-icon">🏡</span>
+                <span>Дачные проекты</span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="../index.html" class="nav-link">Главная</a>
+        </nav>
+    </header>
+
+    <h1>🏗️ Проект Беседки 3×3 метра</h1>
+    <p class="subtitle">П-образная конструкция с щебневым полом, для пучинистых грунтов</p>
+    <p class="subtitle" style="font-size: 0.9em;">Версия 2.0 — с учётом классической плотницкой технологии</p>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Steps')" id="defaultOpen">📋 1. Шаги постройки</button>
+        <button class="tablinks" onclick="openTab(event, 'Estimate')">💰 2. Смета</button>
+        <button class="tablinks" onclick="openTab(event, 'Nodes')">🔧 3. Описание узлов</button>
+    </div>
+
+    <!-- TAB 1: STEPS -->
+    <div id="Steps" class="tabcontent">
+        <h2>Пошаговая инструкция строительства</h2>
+
+        <div class="node-box">
+            <h4>Этап 1: Подготовка и Фундамент (Дни 1-2)</h4>
+            <ol>
+                <li><strong>Разметка:</strong>
+                    <ul>
+                        <li>Вбить 4 колышка по углам будущей беседки</li>
+                        <li>Размер между центрами свай: <span class="dimension">3000 × 3000 мм</span></li>
+                        <li>Обязательно проверить диагонали (должны быть равны, допуск ±10 мм)</li>
+                    </ul>
+                </li>
+                <li><strong>Монтаж свай:</strong>
+                    <ul>
+                        <li>Вкрутить 4 винтовые сваи <span class="dimension">Ø57 мм, L=2500 мм</span> (стенка ≥3.5 мм)</li>
+                        <li>Глубина: ниже глубины промерзания (минимум 1.5 м для средней полосы)</li>
+                        <li>Высота оголовка над землёй: <span class="dimension">+200 мм</span> от уровня щебня</li>
+                        <li>Залить бетон М200-М300 внутрь каждой сваи (~10-12 литров на сваю)</li>
+                        <li>Дать бетону набрать прочность: минимум 3-7 дней</li>
+                    </ul>
+                </li>
+                <li><strong>Подготовка основания (пола):</strong>
+                    <ul>
+                        <li>Снять дёрн внутри периметра на глубину <span class="dimension">50-100 мм</span></li>
+                        <li>Постелить геотекстиль плотностью <span class="dimension">150-200 г/м²</span> с нахлёстом 15-20 см</li>
+                        <li>Засыпать щебень фракции <span class="dimension">20-40 мм</span>, слой <span class="dimension">100 мм</span></li>
+                        <li>Тщательно утрамбовать виброплитой или вручную</li>
+                        <li>Сделать микро-уклон (1-2 см) от центра к краям для стока воды</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="node-box">
+            <h4>Этап 2: Нижняя Обвязка (День 3)</h4>
+            <ol>
+                <li><strong>Подготовка бруса:</strong>
+                    <ul>
+                        <li>Брус <span class="dimension">100×100 мм</span> распилить в размер: 2 шт по <span class="dimension">3000 мм</span>, 1 шт по <span class="dimension">2800 мм</span> (для П-образной формы)</li>
+                        <li>Обработать ВСЕ стороны и торцы антисептиком <strong>ХМ-11</strong> (или аналог для тяжёлых условий)</li>
+                        <li>Дать высохнуть согласно инструкции (обычно 24 часа)</li>
+                    </ul>
+                </li>
+                <li><strong>Гидроизоляция:</strong>
+                    <ul>
+                        <li>На каждый оголовок сваи уложить <strong>2 слоя рубероида</strong> или гидроизоляционной мембраны</li>
+                        <li>Размер куска: <span class="dimension">150×150 мм</span> (с запасом)</li>
+                    </ul>
+                </li>
+                <li><strong>Монтаж:</strong>
+                    <ul>
+                        <li>Уложить брус на оголовки</li>
+                        <li>Соединить углы в полдерева (запил <span class="dimension">50 мм</span> глубиной)</li>
+                        <li>Закрепить к оголовкам через металлические пластины болтами <span class="dimension">M10×100 мм</span></li>
+                        <li>Проверить уровень (допуск ±5 мм по всему периметру)</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="node-box">
+            <h4>Этап 3: Столбы и Верхняя Обвязка (Дни 4-5)</h4>
+            <ol>
+                <li><strong>Подготовка столбов:</strong>
+                    <ul>
+                        <li>4 столба из бруса <span class="dimension">100×100 мм</span>, длина <span class="dimension">2300 мм</span></li>
+                        <li>Обработать нижние <span class="dimension">400 мм</span> (зона обшивки + запас) ХМ-11</li>
+                        <li>Остальную видимую часть — грунтовкой под финишное покрытие</li>
+                        <li>Нижний торец: при монтаже подложить кусок линолеума/резины (изоляция от металла)</li>
+                    </ul>
+                </li>
+                <li><strong>Установка столбов:</strong>
+                    <ul>
+                        <li>Использовать усиленные металлические башмаки (опоры бруса)</li>
+                        <li>Башмак должен быть открытым снизу (не глухой стакан) для вентиляции</li>
+                        <li>Крепить башмак к нижней обвязке на 4-6 саморезов <span class="dimension">8×100 мм</span> или болтов</li>
+                        <li>Вставить столб в башмак, проверить вертикаль уровнем</li>
+                        <li>Зафиксировать столб в башмаке болтами/саморезами</li>
+                    </ul>
+                </li>
+                <li><strong>Верхняя обвязка:</strong>
+                    <ul>
+                        <li>Брус <span class="dimension">100×100 мм</span>, 4 шт по <span class="dimension">3000 мм</span></li>
+                        <li>Уложить сверху на столбы, соединить в полдерева в углах</li>
+                        <li>Крепить к столбам: 2 болта <span class="dimension">M10×150 мм</span> на каждый угол (насквозь)</li>
+                    </ul>
+                </li>
+                <li><strong>Промежуточная лага (для вагонки):</strong>
+                    <ul>
+                        <li>Доска <span class="dimension">100×40 мм</span> или брус <span class="dimension">100×50 мм</span></li>
+                        <li>Высота установки: <span class="dimension">1000 мм</span> от нижней обвязки</li>
+                        <li>Крепить по периметру КРОМЕ входного проёма</li>
+                        <li>К столбам: врезка в полдерева (<span class="dimension">20 мм</span> глубина) + 2 самореза <span class="dimension">8×100 мм</span></li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="node-box">
+            <h4>Этап 4: Раскосы (Жёсткость) (День 6)</h4>
+            <ol>
+                <li><strong>Заготовка:</strong>
+                    <ul>
+                        <li>4 раскоса из бруса <span class="dimension">100×100 мм</span></li>
+                        <li>Длина: <span class="dimension">600-800 мм</span> (по гипотенузе)</li>
+                        <li>Торцы пилить под углом <span class="dimension">45°</span></li>
+                    </ul>
+                </li>
+                <li><strong>Установка:</strong>
+                    <ul>
+                        <li>Разметить положение в верхних внутренних углах</li>
+                        <li>Выбрать пазы в столбе и верхней обвязке глубиной <span class="dimension">15-20 мм</span> (не больше!)</li>
+                        <li>Важно: обеспечить плотное прилегание торцов раскоса к посадочным местам</li>
+                        <li>Засверлить и закрепить болтами-глухарями <span class="dimension">M10×120 мм</span>:
+                            <ul>
+                                <li>2 болта в столб</li>
+                                <li>2 болта в верхнюю обвязку</li>
+                            </ul>
+                        </li>
+                        <li>Клей D3: опционально (только для устранения скрипа, не для прочности!)</li>
+                        <li>Утопить головки болтов, закрыть деревянными пробками (чопиками)</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="tech-note">
+                ⚠️ <strong>Важно:</strong> Не делай врезку глубже 20 мм — это ослабит сечение раскоса. Основную нагрузку несёт древесина на сжатие и болты на срез, а не клей.
+            </div>
+        </div>
+
+        <div class="node-box">
+            <h4>Этап 5: Крыша (Дни 7-9)</h4>
+            <ol>
+                <li><strong>Стропила:</strong>
+                    <ul>
+                        <li>5 шт доска <span class="dimension">150×50 мм</span>, длина <span class="dimension">2000-2200 мм</span> (с учётом свеса)</li>
+                        <li>Угол наклона: <span class="dimension">30°</span></li>
+                        <li>Шаг: <span class="dimension">750 мм</span></li>
+                        <li>Свес за пределы обвязки: <span class="dimension">300-400 мм</span></li>
+                        <li><strong>Врубка «седло»:</strong> выпилить паз глубиной <span class="dimension">30-40 мм</span> для опирания на обвязку</li>
+                        <li>Крепление: 1 гвоздь <span class="dimension">150-200 мм</span> наискось или болт M10 (без металлических уголков!)</li>
+                    </ul>
+                </li>
+                <li><strong>Коньковый узел:</strong>
+                    <ul>
+                        <li>Коньковая доска <span class="dimension">50×150 мм</span> (вровень со стропилами)</li>
+                        <li>Стропила крепятся к коньковой доске сбоку</li>
+                        <li>Альтернатива: соединение стропил в полдерева + накладки</li>
+                    </ul>
+                </li>
+                <li><strong>Затяжка (ригель между стропилами):</strong>
+                    <ul>
+                        <li>Доска <span class="dimension">50×100 мм</span></li>
+                        <li>Установка на высоте <span class="dimension">1/3 от низа стропила</span></li>
+                        <li>Крепление: шпилька <span class="dimension">M12</span> с шайбами и гайками (по 1 на каждое соединение)</li>
+                    </ul>
+                </li>
+                <li><strong>Кровельный пирог:</strong>
+                    <ul>
+                        <li>Плёнка гидроизоляционная <span class="dimension">200 мкм</span> — степлером к стропилам (провис 10-20 мм)</li>
+                        <li>Контробрешетка <span class="dimension">50×50 мм</span> — вдоль стропил, гвозди <span class="dimension">100 мм</span> шаг 300 мм</li>
+                        <li>Обрешетка <span class="dimension">100×25 мм</span> — шаг <span class="dimension">350 мм</span> (под профиль черепицы), гвозди <span class="dimension">100 мм</span></li>
+                        <li>Металлочерепица — саморезы кровельные в низ волны</li>
+                    </ul>
+                </li>
+                <li><strong>Фронтоны:</strong>
+                    <ul>
+                        <li>Зашить доской (имитация бруса/вагонка)</li>
+                        <li>Оставить вентиляционный зазор у конька <span class="dimension">20-30 мм</span></li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="node-box">
+            <h4>Этап 6: Финишная отделка (Дни 10-12)</h4>
+            <ol>
+                <li><strong>Обшивка цоколя:</strong>
+                    <ul>
+                        <li>Вагонка/имитация бруса от нижней обвязки до промежуточной лаги</li>
+                        <li>Крепление: кляймеры или гвозди <span class="dimension">50 мм</span> впотай</li>
+                        <li><strong>Вентзазор:</strong> оставить щель <span class="dimension">10-15 мм</span> внизу (между вагонкой и щебнем)</li>
+                    </ul>
+                </li>
+                <li><strong>Покраска:</strong>
+                    <ul>
+                        <li>Видимые части: масло для террас или лазурь для фасадов (2 слоя)</li>
+                        <li>Торцы досок: прокрасить особенно тщательно</li>
+                        <li>Внутренняя сторона обрешётки: покрасить ДО монтажа черепицы</li>
+                    </ul>
+                </li>
+                <li><strong>ПВХ-шторы:</strong>
+                    <ul>
+                        <li>Установить крепления для ПВХ-штор</li>
+                        <li>Проверить работу механизма сворачивания</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- TAB 2: ESTIMATE -->
+    <div id="Estimate" class="tabcontent">
+        <h2>💰 Смета материалов</h2>
+
+        <div class="price-note">
+            ⚠️ <strong>Внимание:</strong> Цены указаны ориентировочные по состоянию на 2024 год (средние по РФ).
+            Актуальные цены могут отличаться в зависимости от региона, магазина и сезона.
+            Все количества указаны с запасом 10%.
+        </div>
+
+        <h3>🏗️ Фундамент и Подготовка</h3>
+        <table>
+            <tr><th>Материал</th><th>Параметры</th><th>Кол-во</th><th class="price">Цена за ед.</th><th class="price">Итого</th></tr>
+            <tr><td>Сваи винтовые</td><td>Ø57 мм, L=2500 мм, стенка ≥3.5 мм</td><td>4 шт</td><td class="price">1 800 ₽</td><td class="price">7 200 ₽</td></tr>
+            <tr><td>Оголовки свай</td><td>150×150 мм, под брус 100×100</td><td>4 шт</td><td class="price">600 ₽</td><td class="price">2 400 ₽</td></tr>
+            <tr><td>Бетон М200-М300</td><td>Сухая смесь 25 кг</td><td>2 мешка</td><td class="price">350 ₽</td><td class="price">700 ₽</td></tr>
+            <tr><td>Рубероид</td><td>Стандартный 15 м²</td><td>1 рулон</td><td class="price">500 ₽</td><td class="price">500 ₽</td></tr>
+            <tr><td>Геотекстиль</td><td>150-200 г/м²</td><td>12 м²</td><td class="price">50 ₽/м²</td><td class="price">600 ₽</td></tr>
+            <tr><td>Щебень</td><td>Фракция 20-40 мм</td><td>2 тонны</td><td class="price">2 500 ₽/т</td><td class="price">5 000 ₽</td></tr>
+            <tr class="subtotal-row"><td colspan="4">Подытог (Фундамент)</td><td class="price">16 400 ₽</td></tr>
+        </table>
+
+        <h3>🪵 Пиломатериалы</h3>
+        <table>
+            <tr><th>Материал</th><th>Сечение</th><th>Кол-во</th><th class="price">Цена за ед.</th><th class="price">Итого</th></tr>
+            <tr><td>Брус</td><td>100×100 мм, 3м</td><td>10 шт</td><td class="price">1 100 ₽</td><td class="price">11 000 ₽</td></tr>
+            <tr><td>Доска (лаги)</td><td>100×40 мм, 3м</td><td>4 шт</td><td class="price">700 ₽</td><td class="price">2 800 ₽</td></tr>
+            <tr><td>Доска (стропила)</td><td>150×50 мм, 3м</td><td>6 шт</td><td class="price">900 ₽</td><td class="price">5 400 ₽</td></tr>
+            <tr><td>Доска (затяжка)</td><td>100×50 мм, 3м</td><td>2 шт</td><td class="price">750 ₽</td><td class="price">1 500 ₽</td></tr>
+            <tr><td>Доска (конёк)</td><td>150×50 мм, 3м</td><td>1 шт</td><td class="price">900 ₽</td><td class="price">900 ₽</td></tr>
+            <tr><td>Брусок (контробр.)</td><td>50×50 мм, 3м</td><td>6 шт</td><td class="price">400 ₽</td><td class="price">2 400 ₽</td></tr>
+            <tr><td>Доска (обрешетка)</td><td>100×25 мм, 3м</td><td>15 шт</td><td class="price">550 ₽</td><td class="price">8 250 ₽</td></tr>
+            <tr><td>Вагонка/Им. бруса</td><td>Строганая</td><td>25 м²</td><td class="price">600 ₽/м²</td><td class="price">15 000 ₽</td></tr>
+            <tr class="subtotal-row"><td colspan="4">Подытог (Пиломатериалы)</td><td class="price">47 250 ₽</td></tr>
+        </table>
+
+        <h3>🔩 Крепёж</h3>
+        <table>
+            <tr><th>Материал</th><th>Параметры</th><th>Кол-во</th><th class="price">Цена за ед.</th><th class="price">Итого</th></tr>
+            <tr><td>Болты/Глухари</td><td>M10×100 мм</td><td>20 шт</td><td class="price">40 ₽</td><td class="price">800 ₽</td></tr>
+            <tr><td>Болты/Глухари</td><td>M10×150 мм</td><td>16 шт</td><td class="price">50 ₽</td><td class="price">800 ₽</td></tr>
+            <tr><td>Болты/Глухари</td><td>M10×120 мм</td><td>16 шт</td><td class="price">45 ₽</td><td class="price">720 ₽</td></tr>
+            <tr><td>Шпилька резьбовая</td><td>M12 мм</td><td>5 м</td><td class="price">150 ₽/м</td><td class="price">750 ₽</td></tr>
+            <tr><td>Гайки + шайбы</td><td>M10, M12</td><td>80 шт</td><td class="price">10 ₽</td><td class="price">800 ₽</td></tr>
+            <tr><td>Саморезы по дереву</td><td>8×100 мм</td><td>50 шт</td><td class="price">5 ₽</td><td class="price">250 ₽</td></tr>
+            <tr><td>Гвозди винтовые</td><td>200 мм</td><td>1 кг</td><td class="price">200 ₽</td><td class="price">200 ₽</td></tr>
+            <tr><td>Гвозди винтовые</td><td>120 мм</td><td>2 кг</td><td class="price">180 ₽</td><td class="price">360 ₽</td></tr>
+            <tr><td>Гвозди винтовые</td><td>100 мм</td><td>2 кг</td><td class="price">180 ₽</td><td class="price">360 ₽</td></tr>
+            <tr><td>Гвозди/Кляймеры</td><td>50 мм</td><td>1 кг</td><td class="price">250 ₽</td><td class="price">250 ₽</td></tr>
+            <tr><td>Скобы степлера</td><td>10-12 мм</td><td>1 уп</td><td class="price">150 ₽</td><td class="price">150 ₽</td></tr>
+            <tr><td>Опоры бруса (башмаки)</td><td>100×100 мм, усиленные</td><td>4 шт</td><td class="price">400 ₽</td><td class="price">1 600 ₽</td></tr>
+            <tr><td>Саморезы кровельные</td><td>4.8×28 мм, в цвет</td><td>100 шт</td><td class="price">8 ₽</td><td class="price">800 ₽</td></tr>
+            <tr><td>Пробки деревянные</td><td>Ø10-12 мм</td><td>50 шт</td><td class="price">5 ₽</td><td class="price">250 ₽</td></tr>
+            <tr class="subtotal-row"><td colspan="4">Подытог (Крепёж)</td><td class="price">8 040 ₽</td></tr>
+        </table>
+
+        <h3>🏠 Кровля и Гидроизоляция</h3>
+        <table>
+            <tr><th>Материал</th><th>Параметры</th><th>Кол-во</th><th class="price">Цена за ед.</th><th class="price">Итого</th></tr>
+            <tr><td>Металлочерепица</td><td>По профилю</td><td>14 м²</td><td class="price">650 ₽/м²</td><td class="price">9 100 ₽</td></tr>
+            <tr><td>Плёнка гидроизоляционная</td><td>200 мкм, армированная</td><td>35 м²</td><td class="price">40 ₽/м²</td><td class="price">1 400 ₽</td></tr>
+            <tr><td>Коньковая планка</td><td>В цвет черепицы</td><td>4 м</td><td class="price">300 ₽/м</td><td class="price">1 200 ₽</td></tr>
+            <tr><td>Ветровая планка</td><td>В цвет черепицы</td><td>12 м</td><td class="price">250 ₽/м</td><td class="price">3 000 ₽</td></tr>
+            <tr class="subtotal-row"><td colspan="4">Подытог (Кровля)</td><td class="price">14 700 ₽</td></tr>
+        </table>
+
+        <h3>🧴 Химия и Защита</h3>
+        <table>
+            <tr><th>Материал</th><th>Параметры</th><th>Кол-во</th><th class="price">Цена за ед.</th><th class="price">Итого</th></tr>
+            <tr><td>Антисептик</td><td>ХМ-11 или аналог</td><td>10 л</td><td class="price">400 ₽/л</td><td class="price">4 000 ₽</td></tr>
+            <tr><td>Масло/Лазурь</td><td>Для открытых работ</td><td>15 л</td><td class="price">800 ₽/л</td><td class="price">12 000 ₽</td></tr>
+            <tr><td>Клей столярный</td><td>D3 (влагостойкий)</td><td>1 шт</td><td class="price">400 ₽</td><td class="price">400 ₽</td></tr>
+            <tr><td>Линолеум/резина</td><td>Обрезки</td><td>4 куска</td><td class="price">100 ₽</td><td class="price">400 ₽</td></tr>
+            <tr class="subtotal-row"><td colspan="4">Подытог (Химия)</td><td class="price">16 800 ₽</td></tr>
+        </table>
+
+        <h3>🪟 Дополнительно (опционально)</h3>
+        <table>
+            <tr><th>Материал</th><th>Параметры</th><th>Кол-во</th><th class="price">Цена за ед.</th><th class="price">Итого</th></tr>
+            <tr><td>ПВХ-шторы</td><td>С креплением</td><td>1 комплект</td><td class="price">8 000 ₽</td><td class="price">8 000 ₽</td></tr>
+            <tr><td>Доставка материалов</td><td>Зависит от региона</td><td>1</td><td class="price">5 000 ₽</td><td class="price">5 000 ₽</td></tr>
+            <tr class="subtotal-row"><td colspan="4">Подытог (Дополнительно)</td><td class="price">13 000 ₽</td></tr>
+        </table>
+
+        <div class="grand-total">
+            💵 ИТОГО: ~116 190 ₽
+        </div>
+
+        <div class="info" style="margin-top: 20px;">
+            💡 <strong>Как сэкономить:</strong>
+            <ul>
+                <li>ПВХ-шторы можно купить позже (~8 000 ₽ экономии сразу)</li>
+                <li>Доставку можно организовать самостоятельно</li>
+                <li>Часть крепежа может остаться от других строек</li>
+                <li>Искать материалы на строительных базах, а не в сетевых магазинах</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TAB 3: NODES -->
+    <div id="Nodes" class="tabcontent">
+        <h2>🔧 Подробное описание узлов</h2>
+        <p>Каждый узел расписан с размерами, крепежом и последовательностью работ.</p>
+
+        <div class="node-box">
+            <h4>Узел №1: Оголовок сваи + Нижняя обвязка</h4>
+
+            <div class="node-detail"><strong>📐 Размеры:</strong> Брус <span class="dimension">100×100 мм</span>, Оголовок <span class="dimension">150×150 мм</span></div>
+            <div class="node-detail"><strong>🔩 Крепёж:</strong> Болты M10×100 мм (4 шт на оголовок), Рубероид 2 слоя</div>
+            <div class="node-detail"><strong>🧴 Обработка:</strong> Брус — ХМ-11 со всех сторон + торцы</div>
+
+            <h5>Последовательность:</h5>
+            <ol>
+                <li>Обрезать сваю в уровень (высота оголовка <span class="dimension">+200 мм</span> от щебня)</li>
+                <li>Приварить оголовок (если не монолит), зачистить сварной шов, покрасить оголовок антикором</li>
+                <li>Вырезать из рубероида 2 квадрата <span class="dimension">150×150 мм</span></li>
+                <li>Уложить на оголовок (можно приклеить на битумную мастику)</li>
+                <li>Брус 100×100 обработать ХМ-11, дать высохнуть 24 часа</li>
+                <li>Уложить брус на оголовок, проверить уровень</li>
+                <li>Засверлить брус и оголовок сверлом <span class="dimension">Ø10 мм</span></li>
+                <li>Вставить болты M10×100, затянуть гайки с шайбами</li>
+                <li>Углы соединить в полдерева (запил <span class="dimension">50×100 мм</span>), скрепить 2 гвоздями <span class="dimension">150 мм</span></li>
+            </ol>
+
+            <div class="warning">
+                ⚠️ <strong>Критично:</strong> Рубероид между металлом и деревом ОБЯЗАТЕЛЕН. Без него дерево сгниёт за 3-5 лет от конденсата на металле.
+            </div>
+        </div>
+
+        <div class="node-box">
+            <h4>Узел №2: Столб на башмаке к нижней обвязке</h4>
+
+            <div class="node-detail"><strong>📐 Размеры:</strong> Столб <span class="dimension">100×100×2300 мм</span>, Башмак усиленный 100×100 мм</div>
+            <div class="node-detail"><strong>🔩 Крепёж:</strong> Саморезы 8×100 мм (6 шт на башмак) + Болты M10 (2 шт на столб)</div>
+            <div class="node-detail"><strong>🧴 Обработка:</strong> Низ столба (400 мм) — ХМ-11, остальное — грунтовка</div>
+
+            <h5>Последовательность:</h5>
+            <ol>
+                <li>Разметить положение столбов на нижней обвязке (по углам)</li>
+                <li>Установить металлический башмак, выровнять по углу</li>
+                <li>Закрепить башмак к обвязке: 4 самореза в основание + 2 в боковые пластины</li>
+                <li>Низ столба (будущие 400 мм от обвязки) обработать ХМ-11</li>
+                <li>Под нижний торец столба подложить кусок линолеума/резины (изоляция от металла)</li>
+                <li>Вставить столб в башмак, проверить вертикаль уровнем (2 плоскости)</li>
+                <li>Зафиксировать столб в башмаке: 2 болта M10×100 мм через отверстия в башмаке</li>
+                <li>Башмак должен быть открытым снизу для вентиляции торца</li>
+            </ol>
+
+            <div class="info">
+                💡 <strong>Совет:</strong> Используйте усиленные башмаки с рёбрами жёсткости. Тонкие пластины может погнуть при нагрузке.
+            </div>
+        </div>
+
+        <div class="node-box">
+            <h4>Узел №3: Верхняя обвязка на столбе</h4>
+
+            <div class="node-detail"><strong>📐 Размеры:</strong> Брус <span class="dimension">100×100 мм</span>, Столб <span class="dimension">100×100 мм</span></div>
+            <div class="node-detail"><strong>🔩 Крепёж:</strong> Болты M10×150 мм (2 шт на соединение)</div>
+            <div class="node-detail"><strong>🧴 Обработка:</strong> Все стороны — антисептик + грунтовка под покраску</div>
+
+            <h5>Последовательность:</h5>
+            <ol>
+                <li>Уложить брус верхней обвязки на торец столба</li>
+                <li>Соединение в углах: в полдерева (запил <span class="dimension">50×100 мм</span>)</li>
+                <li>Засверлить насквозь: брус + столб, сверло <span class="dimension">Ø10 мм</span></li>
+                <li>Вставить болт M10×150 мм, шайба + гайка снизу</li>
+                <li>Утопить головки болтов на <span class="dimension">5 мм</span>, закрыть пробками</li>
+            </ol>
+        </div>
+
+        <div class="node-box">
+            <h4>Узел №4: Коленный брус (Раскос) — КРИТИЧЕСКИЙ УЗЕЛ</h4>
+
+            <div class="node-detail"><strong>📐 Размеры:</strong> Брус <span class="dimension">100×100 мм</span>, Длина <span class="dimension">600-800 мм</span>, Угол <span class="dimension">45°</span></div>
+            <div class="node-detail"><strong>🔩 Крепёж:</strong> Болты-глухари M10×120 мм (4 шт на раскос)</div>
+            <div class="node-detail"><strong>🧴 Обработка:</strong> Все стороны — антисептик + грунтовка</div>
+
+            <h5>Последовательность:</h5>
+            <ol>
+                <li>Отпилить брусок под углом <span class="dimension">45°</span> с двух торцов</li>
+                <li>Приложить к углу (столб + верхняя обвязка), разметить контур</li>
+                <li>Стамеской/фрезером выбрать паз в столбе глубиной <span class="dimension">15-20 мм</span> по форме раскоса</li>
+                <li>Выбрать паз в верхней обвязке глубиной <span class="dimension">15-20 мм</span></li>
+                <li><strong>Важно:</strong> обеспечить максимально плотное прилегание торцов раскоса к посадочным местам</li>
+                <li>Засверлить через раскос в столб: 2 отверстия, сверло <span class="dimension">Ø8 мм</span></li>
+                <li>Засверлить через раскос в обвязку: 2 отверстия, сверло <span class="dimension">Ø8 мм</span></li>
+                <li>Закрутить глухари M10×120 мм (предварительно засверлить под резьбу)</li>
+                <li>Утопить головки, закрыть пробками в цвет дерева</li>
+                <li>Клей D3: опционально, только для устранения микро-люфтов (не на прочность!)</li>
+            </ol>
+
+            <div class="warning">
+                ⚠️ <strong>Критично:</strong> Не делай врезку глубже 20 мм — это ослабит сечение раскоса. Основную нагрузку несёт древесина на сжатие через плотное прилегание торцов и болты на срез. Клей в торцевое соединение не работает на прочность!
+            </div>
+        </div>
+
+        <div class="node-box">
+            <h4>Узел №5: Промежуточная лага (для вагонки)</h4>
+
+            <div class="node-detail"><strong>📐 Размеры:</strong> Доска <span class="dimension">100×40 мм</span>, Высота установки <span class="dimension">1000 мм</span> от низа</div>
+            <div class="node-detail"><strong>🔩 Крепёж:</strong> Саморезы 8×100 мм (2 шт на столб), Врезка в полдерева</div>
+            <div class="node-detail"><strong>🧴 Обработка:</strong> Антисептик + грунтовка</div>
+
+            <h5>Последовательность:</h5>
+            <ol>
+                <li>Отметить уровень <span class="dimension">1000 мм</span> от нижней обвязки на всех столбах</li>
+                <li>На боковых и заднем столбе: вырезать паз в полдерева (<span class="dimension">20×100 мм</span>)</li>
+                <li>На передних столбах: лага крепится к внутренней грани (без паза для прохода)</li>
+                <li>В проёме входа: лага НЕ ставится (обрывается у внутренних граней передних столбов)</li>
+                <li>Крепить через саморезы 8×100 мм: 2 шт на каждый столб</li>
+                <li>Проверить горизонталь уровнем</li>
+            </ol>
+        </div>
+
+        <div class="node-box">
+            <h4>Узел №6: Стропило к верхней обвязке (Классическая врубка)</h4>
+
+            <div class="node-detail"><strong>📐 Размеры:</strong> Доска <span class="dimension">150×50 мм</span>, Вынос <span class="dimension">300-400 мм</span></div>
+            <div class="node-detail"><strong>🔩 Крепёж:</strong> Гвоздь 150-200 мм наискось или болт M10</div>
+            <div class="node-detail"><strong>🧴 Обработка:</strong> Все видимые части — грунтовка + масло/лазурь</div>
+
+            <h5>Последовательность:</h5>
+            <ol>
+                <li>Разметить положение стропил на верхней обвязке (шаг <span class="dimension">750 мм</span>)</li>
+                <li><strong>Врубка «седло»:</strong> выпилить паз глубиной <span class="dimension">30-40 мм</span> в нижней части стропила</li>
+                <li>Установить стропило, проверить угол <span class="dimension">30°</span>, обеспечить плотное прилегание седла к обвязке</li>
+                <li>Закрепить: 1 гвоздь 150-200 мм наискось через стропило в обвязку</li>
+                <li>Альтернатива: болт M10×150 мм насквозь</li>
+                <li>Свес отпилить по натянутой нитке после установки всех стропил</li>
+            </ol>
+
+            <div class="info">
+                💡 <strong>Примечание:</strong> Металлические уголки не используются. Врубка обеспечивает надёжное опирание на сжатие, гвоздь/болт фиксирует от сдвига.
+            </div>
+        </div>
+
+        <div class="node-box">
+            <h4>Узел №7: Коньковый узел</h4>
+
+            <div class="node-detail"><strong>📐 Размеры:</strong> Коньковая доска <span class="dimension">50×150 мм</span></div>
+            <div class="node-detail"><strong>🔩 Крепёж:</strong> Гвозди 120 мм или болты M10</div>
+            <div class="node-detail"><strong>🧴 Обработка:</strong> Грунтовка + покраска</div>
+
+            <h5>Последовательность:</h5>
+            <ol>
+                <li>Установить коньковую доску <span class="dimension">50×150 мм</span> между стропилами в верхней точке</li>
+                <li>Доска должна быть вровень со стропилами (одна плоскость)</li>
+                <li>Крепить стропила к коньковой доске: 2 гвоздя 120 мм с каждой стороны</li>
+                <li>Альтернатива: соединение стропил в полдерева (запил 50% толщины) + накладки</li>
+            </ol>
+
+            <div class="info">
+                💡 <strong>Почему 50 мм:</strong> Коньковая доска 50 мм встаёт в одну плоскость со стропилами. Обрешетка ложится ровно, коньковая планка прижимается идеально.
+            </div>
+        </div>
+
+        <div class="node-box">
+            <h4>Узел №8: Затяжка стропил (Ригель)</h4>
+
+            <div class="node-detail"><strong>📐 Размеры:</strong> Доска <span class="dimension">50×100 мм</span>, Высота: <span class="dimension">1/3 от низа стропила</span></div>
+            <div class="node-detail"><strong>🔩 Крепёж:</strong> Шпилька M12 + гайки + шайбы (по 1 комплекту на соединение)</div>
+            <div class="node-detail"><strong>🧴 Обработка:</strong> Грунтовка + покраска</div>
+
+            <h5>Последовательность:</h5>
+            <ol>
+                <li>Отмерить высоту установки на стропилах</li>
+                <li>Приложить доску затяжки к стропилам (можно с двух сторон для надёжности)</li>
+                <li>Засверлить насквозь: стропило + затяжка, сверло <span class="dimension">Ø12 мм</span></li>
+                <li>Вставить шпильку M12, надеть шайбы, затянуть гайки</li>
+                <li>Повторить для всех 5 стропильных пар</li>
+            </ol>
+        </div>
+
+        <div class="node-box">
+            <h4>Узел №9: Кровельный пирог</h4>
+
+            <div class="node-detail"><strong>📐 Слои:</strong> Стропила → Плёнка → Контробрешетка → Обрешетка → Черепица</div>
+            <div class="node-detail"><strong>🔩 Крепёж:</strong> Скобы степлера, Гвозди 100-120 мм, Саморезы кровельные</div>
+
+            <h5>Последовательность (снизу вверх):</h5>
+            <ol>
+                <li><strong>Стропила 150×50 мм</strong> — уже установлены</li>
+                <li><strong>Плёнка 200 мкм:</strong>
+                    <ul>
+                        <li>Раскатать горизонтально от карниза к коньку</li>
+                        <li>Нахлёст полос: <span class="dimension">150 мм</span></li>
+                        <li>Провис между стропилами: <span class="dimension">10-20 мм</span> (для стока конденсата)</li>
+                        <li>Крепить скобами степлера к стропилам</li>
+                    </ul>
+                </li>
+                <li><strong>Контробрешетка 50×50 мм:</strong>
+                    <ul>
+                        <li>Вдоль стропил, прямо поверх плёнки</li>
+                        <li>Крепить гвоздями 100 мм, шаг <span class="dimension">300 мм</span></li>
+                        <li>Оставить зазор у конька <span class="dimension">30-50 мм</span> для вентиляции</li>
+                    </ul>
+                </li>
+                <li><strong>Обрешетка 100×25 мм:</strong>
+                    <ul>
+                        <li>Поперёк стропил, поверх контробрешетки</li>
+                        <li>Шаг: <span class="dimension">350 мм</span> (уточнить по профилю черепицы!)</li>
+                        <li>Первая доска у карниза: толще на высоту профиля черепицы</li>
+                        <li>Крепить гвоздями 100 мм (2 шт на каждое пересечение)</li>
+                    </ul>
+                </li>
+                <li><strong>Металлочерепица:</strong>
+                    <ul>
+                        <li>Монтаж от правого нижнего угла</li>
+                        <li>Саморезы в низ волны, не перетягивать!</li>
+                        <li>Нахлёст листов: 1 волна</li>
+                    </ul>
+                </li>
+                <li><strong>Конёк:</strong>
+                    <ul>
+                        <li>Установить с вентиляционными отверстиями</li>
+                        <li>Крепить саморезами в верх волны обрешетки</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="warning">
+                ⚠️ <strong>Критично:</strong> Контробрешетка ОБЯЗАТЕЛЬНА. Без неё конденсат с металла будет стоять на плёнке и гнить стропила сверху.
+            </div>
+        </div>
+
+        <div class="node-box">
+            <h4>Узел №10: Обшивка цоколя (вагонка)</h4>
+
+            <div class="node-detail"><strong>📐 Размеры:</strong> Вагонка/Им. бруса, Высота <span class="dimension">1000 мм</span></div>
+            <div class="node-detail"><strong>🔩 Крепёж:</strong> Кляймеры или гвозди 50 мм впотай</div>
+            <div class="node-detail"><strong>🧴 Обработка:</strong> Масло/лазурь в 2 слоя ДО монтажа</div>
+
+            <h5>Последовательность:</h5>
+            <ol>
+                <li>Покрасить вагонку со всех сторон до монтажа</li>
+                <li>Начать монтаж от угла</li>
+                <li>Крепить к нижней обвязке и промежуточной лаге</li>
+                <li><strong>Вентзазор:</strong> оставить щель <span class="dimension">10-15 мм</span> внизу (между вагонкой и щебнем)</li>
+                <li>На углах: запил 45° или закрыть уголком</li>
+                <li>В проёме входа: аккуратный срез по стойке</li>
+            </ol>
+
+            <div class="info">
+                💡 <strong>Защита столбов:</strong> Нижние 40 см столбов обработаны ХМ-11. Вентзазор в обшивке обеспечит просушку даже при конденсате.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    document.getElementById("defaultOpen").click();
+</script>
+
+</body>
+</html>

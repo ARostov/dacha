@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проект беседки 3х3м - Полная спецификация</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #16a085;
+            margin-top: 25px;
+        }
+
+        /* Tabs */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            border-radius: 5px 5px 0 0;
+            margin-top: 20px;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 16px 24px;
+            transition: 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .tabcontent {
+            display: none;
+            padding: 25px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            animation: fadeEffect 0.5s;
+        }
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        td {
+            padding: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Alerts */
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Cutting diagram */
+        .cut-diagram {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        .pipe-segment {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 5px 10px;
+            margin: 3px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .pipe-waste {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            margin: 3px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .total-row {
+            background-color: #2c3e50 !important;
+            color: white;
+            font-weight: bold;
+        }
+
+        .checklist li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-size: 18px;
+        }
+
+        code {
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', monospace;
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Шапка -->
+    <header class="site-header">
+        <div class="logo">
+            <a href="../index.html">
+                <span class="logo-icon">🏡</span>
+                <span>Дачные проекты</span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="../index.html" class="nav-link">Главная</a>
+        </nav>
+    </header>
+
+    <h1>🏗️ ПРОЕКТ БЕСЕДКИ 3×3 МЕТРА</h1>
+    <p style="text-align: center; color: #7f8c8d;">Полная спецификация материалов, раскрой труб и инструкция по закупке</p>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Materials')" id="defaultOpen">📦 1. Полный список материалов</button>
+        <button class="tablinks" onclick="openTab(event, 'Cutting')">✂️ 2. Раскрой труб</button>
+        <button class="tablinks" onclick="openTab(event, 'Budget')">💰 3. Детальная смета</button>
+        <button class="tablinks" onclick="openTab(event, 'Shopping')">🛒 4. Лист закупки</button>
+    </div>
+
+    <!-- TAB 1: MATERIALS -->
+    <div id="Materials" class="tabcontent">
+        <h2>📦 Полный список материалов</h2>
+        <p>Все позиции для покупки. Берите с запасом 5-10% на брак и ошибки.</p>
+
+        <h3>1. Фундамент</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Наименование</th>
+                <th>Размер</th>
+                <th>Кол-во</th>
+                <th>Примечание</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1.1</td>
+                <td>Свая винтовая</td>
+                <td>Ø76 мм, L=2500 мм, лопасть 300 мм</td>
+                <td>6 шт</td>
+                <td>Сталь Ст3, толщина стенки 3.5-4 мм</td>
+            </tr>
+            <tr>
+                <td>1.2</td>
+                <td>Оголовок сваи</td>
+                <td>200×200 мм, высота 70 мм</td>
+                <td>6 шт</td>
+                <td>Толщина пластины 4 мм</td>
+            </tr>
+            <tr>
+                <td>1.3</td>
+                <td>Мастика битумная</td>
+                <td>2.5 кг</td>
+                <td>2 ведра</td>
+                <td>Для гидроизоляции свай и нижней обвязки</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>2. Металлопрокат (Трубы профильные)</h3>
+        <div class="info">
+            <strong>Важно:</strong> Покупайте трубы длиной 6 метров (стандарт). Толщина стенки указана минимальная. Лучше брать с запасом (3 мм вместо 2 мм).
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Наименование</th>
+                <th>Сечение</th>
+                <th>Толщина стенки</th>
+                <th>Общая длина</th>
+                <th>Кол-во хлыстов (6м)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2.1</td>
+                <td>Труба профильная (Стойки + Конек)</td>
+                <td>80×80 мм</td>
+                <td>3 мм</td>
+                <td>16.8 м</td>
+                <td><strong>3 хлыста</strong></td>
+            </tr>
+            <tr>
+                <td>2.2</td>
+                <td>Труба профильная (Обвязка)</td>
+                <td>60×60 мм</td>
+                <td>3 мм</td>
+                <td>24 м</td>
+                <td><strong>4 хлыста</strong></td>
+            </tr>
+            <tr>
+                <td>2.3</td>
+                <td>Труба профильная (Стропила + Скамьи)</td>
+                <td>40×40 мм</td>
+                <td>2 мм</td>
+                <td>26 м</td>
+                <td><strong>5 хлыстов</strong></td>
+            </tr>
+            <tr>
+                <td>2.4</td>
+                <td>Труба профильная (Обрешетка кровли)</td>
+                <td>40×20 мм</td>
+                <td>2 мм</td>
+                <td>21 м</td>
+                <td><strong>4 хлыста</strong></td>
+            </tr>
+            </tbody>
+            <tr class="total-row">
+                <td colspan="5">ВСЕГО ТРУБ:</td>
+                <td>16 хлыстов по 6 метров</td>
+            </tr>
+        </table>
+
+        <h3>3. Кровля</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Наименование</th>
+                <th>Размер</th>
+                <th>Кол-во</th>
+                <th>Примечание</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>3.1</td>
+                <td>OSB-3 (влагостойкая)</td>
+                <td>2500×1250×12 мм</td>
+                <td>5 листов</td>
+                <td>Площадь 15.6 м² (с запасом на обрезки)</td>
+            </tr>
+            <tr>
+                <td>3.2</td>
+                <td>Гибкая черепица</td>
+                <td>Упаковка 3 м²</td>
+                <td>5 упаковок</td>
+                <td>15 м² + 1 уп. на конек</td>
+            </tr>
+            <tr>
+                <td>3.3</td>
+                <td>Подкладочный ковер</td>
+                <td>1×15 м</td>
+                <td>1 рулон</td>
+                <td>Площадь 15 м²</td>
+            </tr>
+            <tr>
+                <td>3.4</td>
+                <td>Коньково-карнизная черепица</td>
+                <td>Упаковка</td>
+                <td>2 упаковки</td>
+                <td>На конек и свесы</td>
+            </tr>
+            <tr>
+                <td>3.5</td>
+                <td>Гвозди ершеные для OSB</td>
+                <td>3.0×50 мм</td>
+                <td>1 кг</td>
+                <td>Оцинкованные</td>
+            </tr>
+            <tr>
+                <td>3.6</td>
+                <td>Саморезы кровельные</td>
+                <td>4.8×29 мм, EPDM</td>
+                <td>200 шт</td>
+                <td>В цвет черепицы</td>
+            </tr>
+            <tr>
+                <td>3.7</td>
+                <td>Саморезы по металлу</td>
+                <td>4.2×16 мм</td>
+                <td>300 шт</td>
+                <td>Для крепления OSB к стропилам</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>4. Пол и Геоматериалы</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Наименование</th>
+                <th>Размер</th>
+                <th>Кол-во</th>
+                <th>Примечание</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>4.1</td>
+                <td>Геотекстиль</td>
+                <td>Плотность 200 г/м²</td>
+                <td>20 м²</td>
+                <td>Рулон 2×10 м или 1.6×15 м</td>
+            </tr>
+            <tr>
+                <td>4.2</td>
+                <td>Гравий (щебень) фракция 20-40</td>
+                <td>-</td>
+                <td>1.5 тонны</td>
+                <td>Основной слой</td>
+            </tr>
+            <tr>
+                <td>4.3</td>
+                <td>Гравий (щебень) фракция 5-20</td>
+                <td>-</td>
+                <td>1 тонна</td>
+                <td>Верхний слой</td>
+            </tr>
+            <tr>
+                <td>4.4</td>
+                <td>Уголок стальной (бортик)</td>
+                <td>50×50×4 мм</td>
+                <td>14 метров</td>
+                <td>По периметру + запас</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>5. Расходные материалы для сварки и покраски</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Наименование</th>
+                <th>Размер</th>
+                <th>Кол-во</th>
+                <th>Примечание</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>5.1</td>
+                <td>Электроды сварочные</td>
+                <td>Ø3 мм, УОНИ или МР-3</td>
+                <td>5 кг</td>
+                <td>На 16 хлыстов труб с запасом</td>
+            </tr>
+            <tr>
+                <td>5.2</td>
+                <td>Диски отрезные по металлу</td>
+                <td>125 мм (1.6 мм)</td>
+                <td>25 шт</td>
+                <td>Много не бывает, ломаются</td>
+            </tr>
+            <tr>
+                <td>5.3</td>
+                <td>Диски зачистные (лепестковые)</td>
+                <td>125 мм, зерно 40-60</td>
+                <td>10 шт</td>
+                <td>Для зачистки швов</td>
+            </tr>
+            <tr>
+                <td>5.4</td>
+                <td>Грунт-эмаль по металлу</td>
+                <td>2.5 кг</td>
+                <td>2 ведра (5 л)</td>
+                <td>3 в 1 (грунт+антиржав+эмаль)</td>
+            </tr>
+            <tr>
+                <td>5.5</td>
+                <td>Растворитель 646</td>
+                <td>0.5 л</td>
+                <td>2 бутылки</td>
+                <td>Для обезжиривания и очистки</td>
+            </tr>
+            <tr>
+                <td>5.6</td>
+                <td>Кисти малярные</td>
+                <td>50 мм, 75 мм</td>
+                <td>4 шт</td>
+                <td>Дешевые, на выброс</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>6. Дерево (Скамейки и порог)</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Наименование</th>
+                <th>Размер</th>
+                <th>Кол-во</th>
+                <th>Примечание</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>6.1</td>
+                <td>Доска строганая (сосна/лиственница)</td>
+                <td>100×40 мм</td>
+                <td>6 штук по 3м</td>
+                <td>На сиденья скамеек</td>
+            </tr>
+            <tr>
+                <td>6.2</td>
+                <td>Доска пороговая (лиственница/дуб)</td>
+                <td>150×40 мм</td>
+                <td>2 штуки по 3м</td>
+                <td>На входную группу</td>
+            </tr>
+            <tr>
+                <td>6.3</td>
+                <td>Саморезы по дереву</td>
+                <td>4.5×70 мм</td>
+                <td>100 шт</td>
+                <td>Оцинкованные</td>
+            </tr>
+            <tr>
+                <td>6.4</td>
+                <td>Пропитка для дерева</td>
+                <td>2.5 л</td>
+                <td>1 банка</td>
+                <td>Для улицы, с УФ-защитой</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 2: CUTTING -->
+    <div id="Cutting" class="tabcontent">
+        <h2>✂️ Раскрой труб (Карта резки)</h2>
+        <p>Оптимизированный раскрой для минимизации отходов. Все размеры в миллиметрах.</p>
+
+        <div class="info">
+            <strong>Важно:</strong> При резке учитывайте толщину диска (2-3 мм). Разметку делайте с учетом этого. Все размеры даны в чистоте.
+        </div>
+
+        <h3>Труба 80×80×3 мм (3 хлыста по 6м)</h3>
+
+        <div class="cut-diagram">
+            <strong>Хлыст №1:</strong> Стойки (6 шт по 2300 мм)<br>
+            <span class="pipe-segment">2300</span><span class="pipe-segment">2300</span><span class="pipe-segment">2300</span><span class="pipe-waste">Отход 900</span><br>
+            <em>Итого: 3 стойки + 900 мм отход</em>
+        </div>
+
+        <div class="cut-diagram">
+            <strong>Хлыст №2:</strong> Стойки (3 шт) + Конек (1 шт)<br>
+            <span class="pipe-segment">2300</span><span class="pipe-segment">2300</span><span class="pipe-segment">2300</span><span class="pipe-segment">3000</span><span class="pipe-waste">Отход 100</span><br>
+            <em>Итого: 3 стойки + конек 3000 мм + 100 мм отход</em>
+        </div>
+
+        <div class="cut-diagram">
+            <strong>Хлыст №3:</strong> Дополнительные элементы<br>
+            <span class="pipe-segment">600</span><span class="pipe-segment">600</span><span class="pipe-segment">600</span><span class="pipe-segment">600</span><span class="pipe-segment">600</span><span class="pipe-segment">600</span><span class="pipe-waste">Отход 2400</span><br>
+            <em>Итого: 6 штук по 600 мм (фронтонные стойки под конек) + 2400 мм (можно на усиления)</em>
+        </div>
+
+        <h3>Труба 60×60×3 мм (4 хлыста по 6м)</h3>
+
+        <div class="cut-diagram">
+            <strong>Хлыст №1-2:</strong> Нижняя обвязка (4 шт по 3000 мм)<br>
+            <span class="pipe-segment">3000</span><span class="pipe-segment">3000</span><span class="pipe-waste">Отход 0</span><br>
+            <em>Итого: 2 хлыста = 4 стороны нижней обвязки</em>
+        </div>
+
+        <div class="cut-diagram">
+            <strong>Хлыст №3-4:</strong> Верхняя обвязка (4 шт по 3000 мм)<br>
+            <span class="pipe-segment">3000</span><span class="pipe-segment">3000</span><span class="pipe-waste">Отход 0</span><br>
+            <em>Итого: 2 хлыста = 4 стороны верхней обвязки</em>
+        </div>
+
+        <h3>Труба 40×40×2 мм (5 хлыстов по 6м)</h3>
+
+        <div class="cut-diagram">
+            <strong>Хлыст №1-3:</strong> Стропила (8 шт по 1800 мм)<br>
+            <span class="pipe-segment">1800</span><span class="pipe-segment">1800</span><span class="pipe-segment">1800</span><span class="pipe-waste">Отход 600</span><br>
+            <em>Итого: 3 хлыста = 9 стропил (1 запасная) + отходы</em>
+        </div>
+
+        <div class="cut-diagram">
+            <strong>Хлыст №4-5:</strong> Каркас скамеек + перила<br>
+            <span class="pipe-segment">3000</span><span class="pipe-segment">3000</span><span class="pipe-segment">2800</span><span class="pipe-segment">2800</span><span class="pipe-segment">1000</span><span class="pipe-segment">1000</span><span class="pipe-segment">1000</span><span class="pipe-segment">1000</span><span class="pipe-waste">Отход ~400</span><br>
+            <em>Итого: 2 длинные стороны скамеек + 4 вертикальных опоры скамеек</em>
+        </div>
+
+        <h3>Труба 40×20×2 мм (4 хлыста по 6м)</h3>
+
+        <div class="cut-diagram">
+            <strong>Хлыст №1-4:</strong> Обрешетка под OSB<br>
+            <span class="pipe-segment">3000</span><span class="pipe-segment">3000</span><span class="pipe-segment">3000</span><span class="pipe-segment">3000</span><span class="pipe-segment">3000</span><span class="pipe-segment">3000</span><span class="pipe-segment">3000</span><span class="pipe-waste">Отход 0</span><br>
+            <em>Итого: 7 штук на один скат. Нужно 14 штук на 2 ската = 4 хлыста</em>
+        </div>
+
+        <h3>Уголок 50×50×4 мм (Бортик)</h3>
+        <div class="cut-diagram">
+            <strong>Периметр:</strong> 4 стороны по 3000 мм = 12 метров<br>
+            <strong>Покупать:</strong> 2 хлыста по 6м или 3 хлыста по 4м = <strong>14 метров с запасом</strong>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Внимание при резке:</strong>
+            <ul>
+                <li>Трубы 60×60 для обвязки режьте с торцовкой под 45° для красивых углов</li>
+                <li>Стропила режьте под углом (~30°) для стыковки с коньком</li>
+                <li>Размечайте трубы маркером по всему периметру (оберните листом бумаги для ровной линии)</li>
+                <li>Сначала отрежьте все в размер, потом складируйте по группам с подписями</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TAB 3: BUDGET -->
+    <div id="Budget" class="tabcontent">
+        <h2>💰 Детальная смета</h2>
+        <p>Цены ориентировочные (средние по РФ на 2024 год). Могут отличаться в вашем регионе на ±20%.</p>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Категория</th>
+                <th>Позиция</th>
+                <th>Кол-во</th>
+                <th>Цена за ед.</th>
+                <th>Сумма</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td rowspan="3"><strong>Фундамент</strong></td>
+                <td>Свая винтовая Ø76 мм L=2.5м</td>
+                <td>6 шт</td>
+                <td>3 000 ₽</td>
+                <td>18 000 ₽</td>
+            </tr>
+            <tr>
+                <td>Оголовок 200×200 мм</td>
+                <td>6 шт</td>
+                <td>600 ₽</td>
+                <td>3 600 ₽</td>
+            </tr>
+            <tr>
+                <td>Мастика битумная</td>
+                <td>2 ведра</td>
+                <td>1 000 ₽</td>
+                <td>2 000 ₽</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="4">ПОДЫТОГ ФУНДАМЕНТ:</td>
+                <td>23 600 ₽</td>
+            </tr>
+
+            <tr>
+                <td rowspan="4"><strong>Металл</strong></td>
+                <td>Труба 80×80×3 мм (3 хлыста)</td>
+                <td>18 м</td>
+                <td>250 ₽/м</td>
+                <td>4 500 ₽</td>
+            </tr>
+            <tr>
+                <td>Труба 60×60×3 мм (4 хлыста)</td>
+                <td>24 м</td>
+                <td>180 ₽/м</td>
+                <td>4 320 ₽</td>
+            </tr>
+            <tr>
+                <td>Труба 40×40×2 мм (5 хлыстов)</td>
+                <td>30 м</td>
+                <td>120 ₽/м</td>
+                <td>3 600 ₽</td>
+            </tr>
+            <tr>
+                <td>Труба 40×20×2 мм (4 хлыста)</td>
+                <td>24 м</td>
+                <td>90 ₽/м</td>
+                <td>2 160 ₽</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="4">ПОДЫТОГ МЕТАЛЛ:</td>
+                <td>14 580 ₽</td>
+            </tr>
+
+            <tr>
+                <td rowspan="7"><strong>Кровля</strong></td>
+                <td>OSB-3 12мм (5 листов)</td>
+                <td>5 шт</td>
+                <td>1 400 ₽</td>
+                <td>7 000 ₽</td>
+            </tr>
+            <tr>
+                <td>Гибкая черепица</td>
+                <td>5 уп</td>
+                <td>1 500 ₽</td>
+                <td>7 500 ₽</td>
+            </tr>
+            <tr>
+                <td>Подкладочный ковер</td>
+                <td>1 рулон</td>
+                <td>2 500 ₽</td>
+                <td>2 500 ₽</td>
+            </tr>
+            <tr>
+                <td>Коньковая черепица</td>
+                <td>2 уп</td>
+                <td>1 000 ₽</td>
+                <td>2 000 ₽</td>
+            </tr>
+            <tr>
+                <td>Гвозди для OSB</td>
+                <td>1 кг</td>
+                <td>300 ₽</td>
+                <td>300 ₽</td>
+            </tr>
+            <tr>
+                <td>Саморезы кровельные</td>
+                <td>200 шт</td>
+                <td>5 ₽</td>
+                <td>1 000 ₽</td>
+            </tr>
+            <tr>
+                <td>Саморезы по металлу</td>
+                <td>300 шт</td>
+                <td>3 ₽</td>
+                <td>900 ₽</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="4">ПОДЫТОГ КРОВЛЯ:</td>
+                <td>21 200 ₽</td>
+            </tr>
+
+            <tr>
+                <td rowspan="4"><strong>Пол</strong></td>
+                <td>Геотекстиль 200 г/м²</td>
+                <td>20 м²</td>
+                <td>50 ₽</td>
+                <td>1 000 ₽</td>
+            </tr>
+            <tr>
+                <td>Гравий 20-40</td>
+                <td>1.5 т</td>
+                <td>2 500 ₽</td>
+                <td>3 750 ₽</td>
+            </tr>
+            <tr>
+                <td>Гравий 5-20</td>
+                <td>1 т</td>
+                <td>2 500 ₽</td>
+                <td>2 500 ₽</td>
+            </tr>
+            <tr>
+                <td>Уголок 50×50 (бортик)</td>
+                <td>14 м</td>
+                <td>200 ₽</td>
+                <td>2 800 ₽</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="4">ПОДЫТОГ ПОЛ:</td>
+                <td>10 050 ₽</td>
+            </tr>
+
+            <tr>
+                <td rowspan="6"><strong>Расходники</strong></td>
+                <td>Электроды 3 мм</td>
+                <td>5 кг</td>
+                <td>200 ₽</td>
+                <td>1 000 ₽</td>
+            </tr>
+            <tr>
+                <td>Диски отрезные 125 мм</td>
+                <td>25 шт</td>
+                <td>50 ₽</td>
+                <td>1 250 ₽</td>
+            </tr>
+            <tr>
+                <td>Диски зачистные</td>
+                <td>10 шт</td>
+                <td>60 ₽</td>
+                <td>600 ₽</td>
+            </tr>
+            <tr>
+                <td>Грунт-эмаль 3 в 1</td>
+                <td>5 л</td>
+                <td>1 000 ₽</td>
+                <td>5 000 ₽</td>
+            </tr>
+            <tr>
+                <td>Растворитель + кисти</td>
+                <td>комплект</td>
+                <td>500 ₽</td>
+                <td>500 ₽</td>
+            </tr>
+            <tr>
+                <td>Доставка металла</td>
+                <td>1 рейс</td>
+                <td>3 000 ₽</td>
+                <td>3 000 ₽</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="4">ПОДЫТОГ РАСХОДНИКИ:</td>
+                <td>11 350 ₽</td>
+            </tr>
+
+            <tr>
+                <td rowspan="4"><strong>Дерево</strong></td>
+                <td>Доска 100×40 мм</td>
+                <td>18 м</td>
+                <td>150 ₽/м</td>
+                <td>2 700 ₽</td>
+            </tr>
+            <tr>
+                <td>Доска пороговая</td>
+                <td>6 м</td>
+                <td>300 ₽/м</td>
+                <td>1 800 ₽</td>
+            </tr>
+            <tr>
+                <td>Саморезы по дереву</td>
+                <td>100 шт</td>
+                <td>2 ₽</td>
+                <td>200 ₽</td>
+            </tr>
+            <tr>
+                <td>Пропитка для дерева</td>
+                <td>1 банка</td>
+                <td>800 ₽</td>
+                <td>800 ₽</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="4">ПОДЫТОГ ДЕРЕВО:</td>
+                <td>5 500 ₽</td>
+            </tr>
+
+            <tr style="background-color: #f39c12; color: white;">
+                <td colspan="4">ИТОГО МАТЕРИАЛЫ:</td>
+                <td><strong>86 280 ₽</strong></td>
+            </tr>
+            <tr style="background-color: #e74c3c; color: white;">
+                <td colspan="4">РЕЗЕРВ 15% (на ошибки и брак):</td>
+                <td><strong>12 940 ₽</strong></td>
+            </tr>
+            <tr style="background-color: #2c3e50; color: white; font-size: 18px;">
+                <td colspan="4">ВСЕГО С ЗАПАСОМ:</td>
+                <td><strong>99 220 ₽</strong></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="info">
+            <strong>💡 Как сэкономить:</strong>
+            <ul>
+                <li>Покупайте металл на базах, а не в строительных магазинах (дешевле на 20-30%)</li>
+                <li>Заказывайте доставку всех труб одним рейсом</li>
+                <li>Черепицу можно заменить на профлист (экономия ~5000 ₽)</li>
+                <li>Сваи вкручивайте сами с другом (экономия 12 000 ₽ на работе)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TAB 4: SHOPPING LIST -->
+    <div id="Shopping" class="tabcontent">
+        <h2>🛒 Лист закупки (Чек-лист)</h2>
+        <p>Распечатайте этот лист и берите с собой на базу. Отмечайте галочками что куплено.</p>
+
+        <h3>📍 Металлобаза (всё в одном месте)</h3>
+        <ul class="checklist">
+            <li>☐ Труба 80×80×3 мм — 3 хлыста (18 метров)</li>
+            <li>☐ Труба 60×60×3 мм — 4 хлыста (24 метра)</li>
+            <li>☐ Труба 40×40×2 мм — 5 хлыстов (30 метров)</li>
+            <li>☐ Труба 40×20×2 мм — 4 хлыста (24 метра)</li>
+            <li>☐ Уголок 50×50×4 мм — 14 метров (2-3 хлыста)</li>
+            <li>☐ Свая винтовая Ø76 мм L=2.5м — 6 штук</li>
+            <li>☐ Оголовок сваи 200×200 мм — 6 штук</li>
+            <li>☐ <strong>Услуга:</strong> Резка труб в размер (если нет своего инструмента)</li>
+            <li>☐ <strong>Услуга:</strong> Доставка (закажите манипулятор или газель с погрузкой)</li>
+        </ul>
+
+        <h3>📍 Строительный гипермаркет</h3>
+        <ul class="checklist">
+            <li>☐ OSB-3 12мм влагостойкая — 5 листов</li>
+            <li>☐ Гибкая черепица — 5 упаковок + цвет</li>
+            <li>☐ Подкладочный ковер — 1 рулон</li>
+            <li>☐ Коньковая черепица — 2 упаковки</li>
+            <li>☐ Гвозди ершеные 3×50 мм — 1 кг</li>
+            <li>☐ Саморезы кровельные 4.8×29 мм — 200 шт</li>
+            <li>☐ Саморезы по металлу 4.2×16 мм — 300 шт</li>
+            <li>☐ Саморезы по дереву 4.5×70 мм — 100 шт</li>
+            <li>☐ Геотекстиль 200 г/м² — 20 м²</li>
+            <li>☐ Доска 100×40 мм — 6 штук по 3м</li>
+            <li>☐ Доска пороговая 150×40 мм — 2 штуки по 3м</li>
+            <li>☐ Пропитка для дерева — 1 банка</li>
+        </ul>
+
+        <h3>📍 Хозтовары / Сварочный магазин</h3>
+        <ul class="checklist">
+            <li>☐ Мастика битумная — 2 ведра по 2.5 кг</li>
+            <li>☐ Электроды 3 мм — 5 кг</li>
+            <li>☐ Диски отрезные 125 мм — 25 штук</li>
+            <li>☐ Диски зачистные 125 мм — 10 штук</li>
+            <li>☐ Грунт-эмаль по металлу 3 в 1 — 5 литров</li>
+            <li>☐ Растворитель 646 — 1 литр</li>
+            <li>☐ Кисти малярные 50 и 75 мм — 4 штуки</li>
+            <li>☐ Перчатки сварщика (краги) — 2 пары</li>
+            <li>☐ Маска сварщика (лучше хамелеон) — 1 шт</li>
+            <li>☐ Рулетка 5-8 метров — 1 шт</li>
+            <li>☐ Маркер по металлу — 2 шт</li>
+            <li>☐ Угольник слесарный — 1 шт</li>
+            <li>☐ Уровень пузырьковый 60 см — 1 шт</li>
+            <li>☐ Струбцины (зажимы) — 4 шт</li>
+        </ul>
+
+        <h3>📍 Сыпучие материалы (заказ отдельно)</h3>
+        <ul class="checklist">
+            <li>☐ Гравий фракция 20-40 — 1.5 тонны (с доставкой)</li>
+            <li>☐ Гравий фракция 5-20 — 1 тонна (с доставкой)</li>
+        </ul>
+
+        <div class="warning">
+            <strong>⚠️ Перед поездкой на базу:</strong>
+            <ol>
+                <li>Позвоните и уточните наличие всех позиций</li>
+                <li>Узнайте стоимость доставки (часто дешевле взять всё в одном месте)</li>
+                <li>Уточните, есть ли услуга резки труб ( сэкономит время и диски)</li>
+                <li>Проверьте, есть ли погрузка в стоимость</li>
+                <li>Возьмите с собой рулетку — проверяйте длину хлыстов при погрузке!</li>
+            </ol>
+        </div>
+
+        <div class="success">
+            <strong>✅ После закупки:</strong>
+            <ol>
+                <li>Сложите трубы на ровной поверхности (на бруски, не на землю)</li>
+                <li>Сразу подпишите маркером каждую трубу (80×80 Стойка, 60×60 Обвязка и т.д.)</li>
+                <li>Проверьте отсутствие сильной ржавчины (поверхностная — нормально, очистится)</li>
+                <li>Сохраните чеки — вдруг придется что-то докупить или вернуть</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    document.getElementById("defaultOpen").click();
+</script>
+
+</body>
+</html>
